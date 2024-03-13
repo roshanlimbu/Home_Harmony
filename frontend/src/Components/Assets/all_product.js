@@ -24,7 +24,7 @@ let all_product = [
   },
   {
     id: 2,
-    name: "Striped Flutter Sleeve Overlap Collar Peplum Hem Blouse",
+    name: "item_2",
     category: "women",
     image: p2_img,
     new_price: 85.0,
@@ -32,7 +32,7 @@ let all_product = [
   },
   {
     id: 3,
-    name: "Striped Flutter Sleeve Overlap Collar Peplum Hem Blouse",
+    name: "item_3",
     category: "women",
     image: p3_img,
     new_price: 60.0,
@@ -40,7 +40,7 @@ let all_product = [
   },
   {
     id: 4,
-    name: "Striped Flutter Sleeve Overlap Collar Peplum Hem Blouse",
+    name: "item_4",
     category: "women",
     image: p4_img,
     new_price: 100.0,
@@ -48,15 +48,15 @@ let all_product = [
   },
   {
     id: 12,
-    name: "Striped Flutter Sleeve Overlap Collar Peplum Hem Blouse",
-    category: "women",
+    name: "Fiesta 100% BPA-Free Plastic Square Container Set of 9 (250ml) in Teal & Mustard Colour Living Essence",
+    category: "Tableware",
     image: p12_img,
     new_price: 85.0,
     old_price: 120.5,
   },
   {
     id: 13,
-    name: "Men Green Solid Zippered Full-Zip Slim Fit Bomber Jacket",
+    name: "item_13",
     category: "men",
     image: p13_img,
     new_price: 85.0,
@@ -64,7 +64,7 @@ let all_product = [
   },
   {
     id: 14,
-    name: "Men Green Solid Zippered Full-Zip Slim Fit Bomber Jacket",
+    name: "item_14",
     category: "men",
     image: p14_img,
     new_price: 85.0,
@@ -72,7 +72,7 @@ let all_product = [
   },
   {
     id: 15,
-    name: "Men Green Solid Zippered Full-Zip Slim Fit Bomber Jacket",
+    name: "item_15",
     category: "men",
     image: p15_img,
     new_price: 85.0,
@@ -80,7 +80,7 @@ let all_product = [
   },
   {
     id: 16,
-    name: "Men Green Solid Zippered Full-Zip Slim Fit Bomber Jacket",
+    name: "item_16",
     category: "men",
     image: p16_img,
     new_price: 85.0,
@@ -88,7 +88,7 @@ let all_product = [
   },
   {
     id: 25,
-    name: "Boys Orange Colourblocked Hooded Sweatshirt",
+    name: "item_25",
     category: "kid",
     image: p25_img,
     new_price: 85.0,
@@ -96,7 +96,7 @@ let all_product = [
   },
   {
     id: 26,
-    name: "Boys Orange Colourblocked Hooded Sweatshirt",
+    name: "item_26",
     category: "kid",
     image: p26_img,
     new_price: 85.0,
@@ -104,7 +104,7 @@ let all_product = [
   },
   {
     id: 27,
-    name: "Boys Orange Colourblocked Hooded Sweatshirt",
+    name: "item_27",
     category: "kid",
     image: p27_img,
     new_price: 85.0,
@@ -112,7 +112,7 @@ let all_product = [
   },
   {
     id: 28,
-    name: "Boys Orange Colourblocked Hooded Sweatshirt",
+    name: "item_28",
     category: "kid",
     image: p28_img,
     new_price: 85.0,
@@ -120,12 +120,12 @@ let all_product = [
   },
   {
     id: 35,
-    name: "Boys Orange Colourblocked Hooded Sweatshirt",
+    name: "item_35",
     category: "kid",
     image: p35_img,
     new_price: 85.0,
     old_price: 120.5,
-  },
+  }
 ];
 
 export default all_product;
