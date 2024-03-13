@@ -15,7 +15,7 @@ const Navbar = () => {
     <div className="navbar">
       <div className="nav-logo">
         <img src={logo} alt="" />
-        <p>SHOPPER</p>
+        <p>Home <span>Harmony</span></p>
       </div>
       <ul className="nav-menu">
         <li
@@ -23,8 +23,8 @@ const Navbar = () => {
             setMenu("shop");
           }}
         >
-          <Link style={{ textDecoration: "none" }} to="/">
-            Shop
+          <Link style={{ textDecoration: "none", color: "black" }} to="/">
+            Furniture
           </Link>
           {menu === "shop" ? <hr /> : <></>}
         </li>
@@ -33,8 +33,8 @@ const Navbar = () => {
             setMenu("mens");
           }}
         >
-          <Link style={{ textDecoration: "none" }} to="mens">
-            Men
+          <Link style={{ textDecoration: "none", color: "black" }} to="mens">
+            Office
           </Link>
           {menu === "mens" ? <hr /> : <></>}
         </li>
@@ -43,8 +43,8 @@ const Navbar = () => {
             setMenu("womens");
           }}
         >
-          <Link style={{ textDecoration: "none" }} to="womens">
-            Women
+          <Link style={{ textDecoration: "none", color: "black" }} to="womens">
+            Tableware & Kitchenware
           </Link>
           {menu === "womens" ? <hr /> : <></>}
         </li>
@@ -53,8 +53,8 @@ const Navbar = () => {
             setMenu("kids");
           }}
         >
-          <Link style={{ textDecoration: "none" }} to="/kids">
-            Kids
+          <Link style={{ textDecoration: "none", color: "black" }} to="/kids">
+            Decor
           </Link>
           {menu === "kids" ? <hr /> : <></>}
         </li>
