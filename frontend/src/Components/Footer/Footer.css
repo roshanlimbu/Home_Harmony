@@ -67,3 +67,6 @@
   gap: 20px;
   margin-top: 20px;
 }
+.nav-logo p span {
+  color: #c35e0e;
+}
