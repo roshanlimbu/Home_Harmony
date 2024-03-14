@@ -34,30 +34,30 @@ const Navbar = () => {
         </li>
         <li
           onClick={() => {
-            setMenu("mens");
+            setMenu("office");
           }}
         >
-          <Link style={{ textDecoration: "none", color: "black" }} to="mens">
+          <Link style={{ textDecoration: "none", color: "black" }} to="office">
             Office
           </Link>
-          {menu === "mens" ? <hr /> : <></>}
+          {menu === "office" ? <hr /> : <></>}
         </li>
         <li
           onClick={() => {
-            setMenu("womens");
+            setMenu("Tableware & Kitchenware");
           }}
         >
-          <Link style={{ textDecoration: "none", color: "black" }} to="womens">
+          <Link style={{ textDecoration: "none", color: "black" }} to="Tableware & Kitchenware">
             Tableware & Kitchenware
           </Link>
           {menu === "womens" ? <hr /> : <></>}
         </li>
         <li
           onClick={() => {
-            setMenu("kids");
+            setMenu("decor");
           }}
         >
-          <Link style={{ textDecoration: "none", color: "black" }} to="/kids">
+          <Link style={{ textDecoration: "none", color: "black" }} to="/decor">
             Decor
           </Link>
           {menu === "kids" ? <hr /> : <></>}
