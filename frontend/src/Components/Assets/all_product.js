@@ -17,7 +17,7 @@ let all_product = [
   {
     id: 1,
     name: "Striped Flutter Sleeve Overlap Collar Peplum Hem Blouse",
-    category: "women",
+    category: "Tableware & Kitchenware",
     image: p1_img,
     new_price: 50.0,
     old_price: 80.5,
@@ -25,7 +25,7 @@ let all_product = [
   {
     id: 2,
     name: "item_2",
-    category: "women",
+    category: "Tableware & Kitchenware",
     image: p2_img,
     new_price: 85.0,
     old_price: 120.5,
@@ -33,7 +33,7 @@ let all_product = [
   {
     id: 3,
     name: "item_3",
-    category: "women",
+    category: "Tableware & Kitchenware",
     image: p3_img,
     new_price: 60.0,
     old_price: 100.5,
@@ -41,7 +41,7 @@ let all_product = [
   {
     id: 4,
     name: "item_4",
-    category: "women",
+    category: "Tableware & Kitchenware",
     image: p4_img,
     new_price: 100.0,
     old_price: 150.0,
@@ -57,7 +57,7 @@ let all_product = [
   {
     id: 13,
     name: "item_13",
-    category: "men",
+    category: "office",
     image: p13_img,
     new_price: 85.0,
     old_price: 120.5,
@@ -65,7 +65,7 @@ let all_product = [
   {
     id: 14,
     name: "item_14",
-    category: "men",
+    category: "office",
     image: p14_img,
     new_price: 85.0,
     old_price: 120.5,
@@ -73,7 +73,7 @@ let all_product = [
   {
     id: 15,
     name: "item_15",
-    category: "men",
+    category: "office",
     image: p15_img,
     new_price: 85.0,
     old_price: 120.5,
@@ -81,7 +81,7 @@ let all_product = [
   {
     id: 16,
     name: "item_16",
-    category: "men",
+    category: "office",
     image: p16_img,
     new_price: 85.0,
     old_price: 120.5,
@@ -89,7 +89,7 @@ let all_product = [
   {
     id: 25,
     name: "item_25",
-    category: "kid",
+    category: "decor", // Updated category to "decor"
     image: p25_img,
     new_price: 85.0,
     old_price: 120.5,
@@ -97,7 +97,7 @@ let all_product = [
   {
     id: 26,
     name: "item_26",
-    category: "kid",
+    category: "decor", // Updated category to "decor"
     image: p26_img,
     new_price: 85.0,
     old_price: 120.5,
@@ -105,7 +105,7 @@ let all_product = [
   {
     id: 27,
     name: "item_27",
-    category: "kid",
+    category: "decor", // Updated category to "decor"
     image: p27_img,
     new_price: 85.0,
     old_price: 120.5,
@@ -113,7 +113,7 @@ let all_product = [
   {
     id: 28,
     name: "item_28",
-    category: "kid",
+    category: "decor", // Updated category to "decor"
     image: p28_img,
     new_price: 85.0,
     old_price: 120.5,
@@ -121,7 +121,7 @@ let all_product = [
   {
     id: 35,
     name: "item_35",
-    category: "kid",
+    category: "decor", // Updated category to "decor"
     image: p35_img,
     new_price: 85.0,
     old_price: 120.5,
