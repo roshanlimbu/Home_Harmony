@@ -80,6 +80,39 @@ const Product = mongoose.model("Product", {
     default: true,
   },
 });
+
+// api for removing the product
+app.delete("/removeproduct/:id", async (req, res) => {
+  let id = req.params.id;
+  let product = await Product.findById(id);
+  if (product) {
+    await product.remove();
+    res.json({
+      success: true,
+    });
+  } else {
+    res.json({
+      success: false,
+    });
+  }
+});
+
+// api route for searching product using id
+app.get("/product/:id", async (req, res) => {
+  let id = req.params.id;
+  let product = await Product.findById(id);
+  if (product) {
+    res.json({
+      success: true,
+      product: product,
+    });
+  } else {
+    res.json({
+      success: false,
+    });
+  }
+});
+
 app.post("/addproduct", async (req, res) => {
   let products = await Product.find({});
   let id;
@@ -90,6 +123,7 @@ app.post("/addproduct", async (req, res) => {
   } else {
     id = 1;
   }
+
   const product = new Product({
     id: id,
     name: req.body.name,
