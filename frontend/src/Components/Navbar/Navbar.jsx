@@ -1,7 +1,7 @@
 import { useState } from "react";
 import React from "react";
 import "./Navbar.css";
-import logo from "../Assets/logo.png";
+// import logo from "../Assets/logo.png";
 import cart_icon from "../Assets/cart_icon.png";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
@@ -14,8 +14,12 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <div className="nav-logo">
-        <img src={logo} alt="" />
-        <p>SHOPPER</p>
+        <Link to="/" style={{ textDecoration: "none" }}>
+          {/* <img src={logo} alt="" /> */}
+          <p>
+            Home <span>Harmony</span>
+          </p>
+        </Link>
       </div>
       <ul className="nav-menu">
         <li
@@ -23,38 +27,38 @@ const Navbar = () => {
             setMenu("shop");
           }}
         >
-          <Link style={{ textDecoration: "none" }} to="/">
-            Shop
+          <Link style={{ textDecoration: "none", color: "black" }} to="/">
+            Furniture
           </Link>
           {menu === "shop" ? <hr /> : <></>}
         </li>
         <li
           onClick={() => {
-            setMenu("mens");
+            setMenu("office");
           }}
         >
-          <Link style={{ textDecoration: "none" }} to="mens">
-            Men
+          <Link style={{ textDecoration: "none", color: "black" }} to="office">
+            Office
           </Link>
-          {menu === "mens" ? <hr /> : <></>}
+          {menu === "office" ? <hr /> : <></>}
         </li>
         <li
           onClick={() => {
-            setMenu("womens");
+            setMenu("Tableware & Kitchenware");
           }}
         >
-          <Link style={{ textDecoration: "none" }} to="womens">
-            Women
+          <Link style={{ textDecoration: "none", color: "black" }} to="Tableware & Kitchenware">
+            Tableware & Kitchenware
           </Link>
           {menu === "womens" ? <hr /> : <></>}
         </li>
         <li
           onClick={() => {
-            setMenu("kids");
+            setMenu("decor");
           }}
         >
-          <Link style={{ textDecoration: "none" }} to="/kids">
-            Kids
+          <Link style={{ textDecoration: "none", color: "black" }} to="/decor">
+            Decor
           </Link>
           {menu === "kids" ? <hr /> : <></>}
         </li>
