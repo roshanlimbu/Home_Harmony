@@ -11,16 +11,22 @@ const PORT = process.env.PORT || 7000;
 app.use(express.json());
 app.use(cors());
 
-mongoose
-  .connect(
-    "mongodb+srv://birenlimbu415:JVZc0AZmwXeA34Cp@cluster01.dee5ny7.mongodb.net/e-commerce",
-  )
-  .catch((error) => {
-    console.error("An error occurred while connecting to mongodb", error);
-  });
+mongoose.connect(process.env.URI).catch((error) => {
+  console.error("An error occurred while connecting to mongodb", error);
+});
 
 app.get("/", (req, res) => {
   res.send({ msg: "hello" });
+});
+
+const storage = multer.diskStorage({
+  destination: "./upload/images",
+  filename: (req, file, cb) => {
+    return cb(
+      null,
+      `${file.fieldname}_${Date.now()}_${file.extname(file.originalname)}`,
+    );
+  },
 });
 
 app.listen(PORT, (err) => {
