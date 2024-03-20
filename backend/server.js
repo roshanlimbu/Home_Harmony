@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 7000;
 app.use(express.json());
 app.use(cors());
 
-mongoose.connect(process.env.URI).catch((error) => {
+mongoose.connect(process.env.MONGO_URI).catch((error) => {
   console.error("An error occurred while connecting to mongodb", error);
 });
 
@@ -40,9 +40,63 @@ app.post("/upload", upload.single("product"), (req, res) => {
   } else {
     res.json({
       success: 1,
-      image_url: `http:localhost:${PORT}/images/${req.file.filename}`,
+      image_url: `http://localhost:${PORT}/images/${req.file.filename}`,
     });
   }
+});
+
+// schema for db
+const Product = mongoose.model("Product", {
+  id: {
+    type: Number,
+    required: true,
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  image: {
+    type: String,
+    required: true,
+  },
+  category: {
+    type: String,
+    required: true,
+  },
+  new_price: {
+    type: Number,
+    required: true,
+  },
+  old_price: {
+    type: Number,
+    required: true,
+  },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
+  available: {
+    type: Boolean,
+    default: true,
+  },
+});
+app.post("/addproduct", async (req, res) => {
+  const product = new Product({
+    id: req.body.id,
+    name: req.body.name,
+    image: req.body.image,
+    category: req.body.category,
+    new_price: req.body.new_price,
+    old_price: req.body.old_price,
+    available: req.body.available,
+  });
+  console.log(product);
+  await product.save();
+  console.log("Product added successfully in the database.");
+  res.json({
+    success: true,
+    name: req.body.name,
+  });
 });
 
 app.listen(PORT, (err) => {
