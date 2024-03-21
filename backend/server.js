@@ -83,32 +83,47 @@ const Product = mongoose.model("Product", {
 
 // api for removing the product
 app.delete("/removeproduct/:id", async (req, res) => {
-  let id = req.params.id;
-  let product = await Product.findById(id);
-  if (product) {
-    await product.remove();
-    res.json({
-      success: true,
-    });
-  } else {
-    res.json({
+  try {
+    let id = req.params.id;
+    let product = await Product.findById(id);
+    if (product) {
+      await product.remove();
+      res.json({
+        success: true,
+      });
+    } else {
+      res.json({
+        success: false,
+      });
+    }
+  } catch (err) {
+    console.error("Error removing the product", err);
+    res.status(500).json({
       success: false,
+      message: "Internal Server Error",
     });
   }
 });
 
 // api route for searching product using id
 app.get("/product/:id", async (req, res) => {
-  let id = req.params.id;
-  let product = await Product.findById(id);
-  if (product) {
-    res.json({
-      success: true,
-      product: product,
-    });
-  } else {
-    res.json({
-      success: false,
+  try {
+    let id = req.params.id;
+    let product = await Product.findById(id);
+    if (product) {
+      res.json({
+        success: true,
+        product: product,
+      });
+    } else {
+      res.json({
+        success: false,
+      });
+    }
+  } catch (err) {
+    console.error("Error searching for the product", err);
+    res.status(500).json({
+      message: false,
     });
   }
 });
