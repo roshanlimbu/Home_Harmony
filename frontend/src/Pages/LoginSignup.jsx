@@ -5,6 +5,7 @@ import "./CSS/LoginSignup.css";
 
 const LoginSignup = () => {
   const [state, setState] = useState("Login");
+  const [agree, setAgree] = useState(false);
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -12,7 +13,10 @@ const LoginSignup = () => {
   });
 
   const login = async () => {
-    console.log("Login function called", formData);
+    if (!agree) {
+      alert("Please agree to the terms of use & privacy policies.");
+      return;
+    }
     try {
       const response = await fetch("http://localhost:5000/login", {
         method: "POST",
@@ -36,7 +40,10 @@ const LoginSignup = () => {
   };
 
   const signup = async () => {
-    console.log("Signup function called", formData);
+    if (!agree) {
+      alert("Please agree to the terms of use & privacy policies.");
+      return;
+    }
     try {
       const response = await fetch("http://localhost:5000/signup", {
         method: "POST",
@@ -60,6 +67,9 @@ const LoginSignup = () => {
   };
   const changeHandler = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+  const toggleAgree = () => {
+    setAgree(!agree);
   };
 
   return (
@@ -108,11 +118,17 @@ const LoginSignup = () => {
         ) : (
           <p className="loginsignup-login">
             Create an account?{" "}
-            <span onClick={() => setState("Sign Up")}>Login Here</span>
+            <span onClick={() => setState("Sign Up")}>Sign Up</span>
           </p>
         )}
         <div className="loginsignup-agree">
-          <input type="checkbox" name="" id="" />
+          <input
+            type="checkbox"
+            name=""
+            id=""
+            checked={agree}
+            onChange={toggleAgree}
+          />
           <p>By continuing, i agree to the terms of use & privacy policies.</p>
         </div>
       </div>
