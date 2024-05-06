@@ -190,4 +190,13 @@
     padding: 8px 0px;
     gap: 0;
   }
+
+  .nav-menu {
+    height: 70px;
+    top: 50px;
+  }
+
+  .nav-login-cart {
+    transform: scale(0.8);
+  }
 }
