@@ -28,45 +28,29 @@ const Navbar = () => {
       </div>
       <img className="nav-dropdown" onClick={dropdown_toggle} src={nav_dropdown} alt="" />
       <ul ref={menuRef} className="nav-menu">
-        <li
-          onClick={() => {
-            setMenu("shop");
-          }}
-        >
+        <li onClick={() => { setMenu("shop"); }}>
           <Link style={{ textDecoration: "none", color: "black" }} to="/">
             Furniture
           </Link>
-          {menu === "shop" ? <hr /> : <></>}
+          {menu === "shop" ? <hr /> : null}
         </li>
-        <li
-          onClick={() => {
-            setMenu("office");
-          }}
-        >
+        <li onClick={() => { setMenu("office"); }}>
           <Link style={{ textDecoration: "none", color: "black" }} to="office">
             Office
           </Link>
-          {menu === "office" ? <hr /> : <></>}
+          {menu === "office" ? <hr /> : null}
         </li>
-        <li
-          onClick={() => {
-            setMenu("Tableware & Kitchenware");
-          }}
-        >
-          <Link style={{ textDecoration: "none", color: "black" }} to="Tableware & Kitchenware">
-            Tableware & Kitchenware
+        <li onClick={() => { setMenu("Tableware/Kitchenware"); }}>
+          <Link style={{ textDecoration: "none", color: "black" }} to="Tableware/Kitchenware">
+            Tableware/Kitchenware
           </Link>
-          {menu === "womens" ? <hr /> : <></>}
+          {menu === "Tableware/Kitchenware" ? <hr /> : null}
         </li>
-        <li
-          onClick={() => {
-            setMenu("decor");
-          }}
-        >
+        <li onClick={() => { setMenu("decor"); }}>
           <Link style={{ textDecoration: "none", color: "black" }} to="/decor">
             Decor
           </Link>
-          {menu === "kids" ? <hr /> : <></>}
+          {menu === "decor" ? <hr /> : null}
         </li>
       </ul>
       <div className="nav-login-cart">
