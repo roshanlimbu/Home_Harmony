@@ -40,11 +40,11 @@ const Navbar = () => {
           </Link>
           {menu === "office" ? <hr /> : null}
         </li>
-        <li onClick={() => { setMenu("Tableware/Kitchenware"); }}>
-          <Link style={{ textDecoration: "none", color: "black" }} to="Tableware/Kitchenware">
-            Tableware/Kitchenware
+        <li onClick={() => { setMenu("Kitchenware"); }}>
+          <Link style={{ textDecoration: "none", color: "black" }} to="Kitchenware">
+            Kitchenware
           </Link>
-          {menu === "Tableware/Kitchenware" ? <hr /> : null}
+          {menu === "Kitchenware" ? <hr /> : null}
         </li>
         <li onClick={() => { setMenu("decor"); }}>
           <Link style={{ textDecoration: "none", color: "black" }} to="/decor">
