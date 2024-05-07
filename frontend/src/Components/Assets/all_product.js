@@ -17,7 +17,7 @@ let all_product = [
   {
     id: 1,
     name: "item_1",
-    category: "Kitchenware",
+    category: "Tableware & Kitchenware",
     image: p1_img,
     new_price: 50.0,
     old_price: 80.5,
@@ -125,7 +125,7 @@ let all_product = [
     image: p35_img,
     new_price: 85.0,
     old_price: 120.5,
-  }
+  },
 ];
 
 export default all_product;
