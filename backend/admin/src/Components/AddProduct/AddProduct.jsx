@@ -33,14 +33,30 @@ const AddProduct = () => {
         Accept: "application/json",
       },
       body: formData,
-    }).then((response) => {
+    }).then((response) =>
       response.json().then((data) => {
         responseData = data;
-      });
-      if (responseData.success) {
-        product.image = responseData.image_url;
-      }
-    });
+      }),
+    );
+
+    if (responseData.success) {
+      product.image = responseData.image_url;
+      console.log(product);
+      await fetch("http://localhost:5000/addproduct", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(product),
+      }).then((response) =>
+        response.json().then((data) => {
+          data.success
+            ? alert("Successfully added")
+            : alert("Failed to add product");
+        }),
+      );
+    }
   };
 
   return (
@@ -86,7 +102,7 @@ const AddProduct = () => {
           className="add-product-selector"
         >
           <option value="furniture">Furniture</option>
-          <option value="fffice">Office</option>
+          <option value="office">Office</option>
           <option value="kitchenware">Kitchenware</option>
           <option value="decor">Decor</option>
         </select>
