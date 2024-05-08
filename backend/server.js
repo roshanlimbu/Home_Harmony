@@ -81,7 +81,7 @@ const Product = mongoose.model("Product", {
   },
 });
 
-// api for removing the product
+// api for removing the product by id
 app.delete("/removeproduct/:id", async (req, res) => {
   try {
     let id = req.params.id;
@@ -127,7 +127,7 @@ app.get("/product/:id", async (req, res) => {
     });
   }
 });
-
+// adding products
 app.post("/addproduct", async (req, res) => {
   let products = await Product.find({});
   let id;
