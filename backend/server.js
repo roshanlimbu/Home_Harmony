@@ -82,52 +82,119 @@ const Product = mongoose.model("Product", {
 });
 
 // api for removing the product
-app.delete("/removeproduct/:id", async (req, res) => {
-  try {
-    let id = req.params.id;
-    let product = await Product.findById(id);
-    if (product) {
-      await product.remove();
-      res.json({
-        success: true,
-      });
-    } else {
-      res.json({
-        success: false,
-      });
-    }
-  } catch (err) {
-    console.error("Error removing the product", err);
-    res.status(500).json({
+app.post("/removeproduct", async (req, res) => {
+  await Product.findOneAndDelete({ id: req.body.id });
+  console.log("Removed.");
+  res.json({
+    success: true,
+    name: req.body.name,
+  });
+});
+
+// creating api for getting all products
+app.get("/allproducts", async (req, res) => {
+  let products = await Product.find({});
+  console.log("All products found.");
+  res.send(products);
+});
+
+// Shema creating for User Model
+const Users = mongoose.model("Users", {
+  name: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  cartData: {
+    type: Object,
+  },
+  date: {
+    type: Date,
+    default: Date.new,
+  },
+});
+
+// Creating Endpoint for regestering the user
+app.post("/signup", async (req, res) => {
+  let check = await Users.findOne({ email: req.body.email });
+  if (check) {
+    return res.status(400).json({
       success: false,
-      message: "Internal Server Error",
+      errors: "Existing user found with same email address",
     });
   }
+  let cart = {};
+  for (let i = 0; i < 300; i++) {
+    cart[i] = 0;
+  }
+  const user = new Users({
+    name: req.body.username,
+    email: req.body.email,
+    password: req.body.password,
+    cartData: cart,
+  });
+
+  await user.save();
+
+  const data = {
+    user: {
+      id: user.id,
+    },
+  };
+
+  const token = jwt.sign(data, "secret_ecom");
+  res.json({
+    success: true,
+    token,
+  });
 });
 
-// api route for searching product using id
-app.get("/product/:id", async (req, res) => {
-  try {
-    let id = req.params.id;
-    let product = await Product.findById(id);
-    if (product) {
+app.post("/login", async (req, res) => {
+  let user = await Users.findOne({ email: req.body.email });
+  if (user) {
+    const userVerify = req.body.password === user.password;
+    if (userVerify) {
+      const data = {
+        user: {
+          id: user.id,
+        },
+      };
+      const token = jwt.sign(data, "secret_ecom");
       res.json({
         success: true,
-        product: product,
+        token,
       });
     } else {
-      res.json({
-        success: false,
-      });
+      res.json({ success: false, errors: "Wrong Password" });
     }
-  } catch (err) {
-    console.error("Error searching for the product", err);
-    res.status(500).json({
-      message: false,
-    });
+  } else {
+    res.json({ success: false, errors: "No user found with this email" });
   }
 });
 
+app.get("/newcollection", async (req, res) => {
+  let products = await Product.find({});
+  let newCollection = products.slice(1).slice(-8);
+  console.log("New collection fetched.");
+  res.send(newCollection);
+});
+
+app.get("/popular", async (req, res) => {
+  let products = await Product.find({ category: "kitchenware" });
+  let popular_in_kitchenware = products.slice(0, 4);
+  console.log("Popular in kitchenware fetched.");
+  res.send(popular_in_kitchenware);
+});
+
+// adding products
 app.post("/addproduct", async (req, res) => {
   let products = await Product.find({});
   let id;
