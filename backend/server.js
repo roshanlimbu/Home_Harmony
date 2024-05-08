@@ -82,50 +82,20 @@ const Product = mongoose.model("Product", {
 });
 
 // api for removing the product
-app.delete("/removeproduct/:id", async (req, res) => {
-  try {
-    let id = req.params.id;
-    let product = await Product.findById(id);
-    if (product) {
-      await product.remove();
-      res.json({
-        success: true,
-      });
-    } else {
-      res.json({
-        success: false,
-      });
-    }
-  } catch (err) {
-    console.error("Error removing the product", err);
-    res.status(500).json({
-      success: false,
-      message: "Internal Server Error",
-    });
-  }
+app.post("/removeproduct", async (req, res) => {
+  await Product.findOneAndDelete({ id: req.body.id });
+  console.log("Removed.");
+  res.json({
+    success: true,
+    name: req.body.name,
+  });
 });
 
-// api route for searching product using id
-app.get("/product/:id", async (req, res) => {
-  try {
-    let id = req.params.id;
-    let product = await Product.findById(id);
-    if (product) {
-      res.json({
-        success: true,
-        product: product,
-      });
-    } else {
-      res.json({
-        success: false,
-      });
-    }
-  } catch (err) {
-    console.error("Error searching for the product", err);
-    res.status(500).json({
-      message: false,
-    });
-  }
+// creating api for getting all products
+app.get("/allproducts", async (req, res) => {
+  let products = await Product.find({});
+  console.log("All products found.");
+  res.send(products);
 });
 
 app.post("/addproduct", async (req, res) => {
