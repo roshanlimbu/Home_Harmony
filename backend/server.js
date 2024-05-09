@@ -81,23 +81,6 @@ const Product = mongoose.model("Product", {
   },
 });
 
-// api for removing the product
-app.post("/removeproduct", async (req, res) => {
-  await Product.findOneAndDelete({ id: req.body.id });
-  console.log("Removed.");
-  res.json({
-    success: true,
-    name: req.body.name,
-  });
-});
-
-// creating api for getting all products
-app.get("/allproducts", async (req, res) => {
-  let products = await Product.find({});
-  console.log("All products found.");
-  res.send(products);
-});
-
 // Shema creating for User Model
 const Users = mongoose.model("Users", {
   name: {
@@ -120,6 +103,23 @@ const Users = mongoose.model("Users", {
     type: Date,
     default: Date.new,
   },
+});
+
+// api for removing the product
+app.post("/removeproduct", async (req, res) => {
+  await Product.findOneAndDelete({ id: req.body.id });
+  console.log("Removed.");
+  res.json({
+    success: true,
+    name: req.body.name,
+  });
+});
+
+// creating api for getting all products
+app.get("/allproducts", async (req, res) => {
+  let products = await Product.find({});
+  console.log("All products found.");
+  res.send(products);
 });
 
 // Creating Endpoint for regestering the user
@@ -192,6 +192,32 @@ app.get("/popular", async (req, res) => {
   let popular_in_kitchenware = products.slice(0, 4);
   console.log("Popular in kitchenware fetched.");
   res.send(popular_in_kitchenware);
+});
+
+const fetchUser = async (req, res, next) => {
+  const token = req.header("auth-token");
+  if (!token) {
+    res.status(401).send({ errors: "Please authentiacte." });
+  } else {
+    try {
+      const data = jwt.verify(token, "secret_ecom");
+      req.user = data.user;
+      next();
+    } catch (error) {
+      res.status(401).send({ errors: "Please authentiacte with valid token." });
+    }
+  }
+};
+
+app.post("/addtocart", fetchUser, async (req, res) => {
+  console.log(req.body);
+  // let userData = await Users.findOne({ _id: req.user.id });
+  // userData.cartData[req.body.itemId] += 1;
+  // await Users.findOneAndUpdate(
+  //   { _id: req.user.id },
+  //   { cartData: userData.userData },
+  // );
+  // res.send("Added");
 });
 
 // adding products
