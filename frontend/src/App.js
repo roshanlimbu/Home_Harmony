@@ -21,8 +21,8 @@ function App() {
             element={<ShopCategory banner={banner} category="office" />}
           />
           <Route
-            path="/Kitcheware"
-            element={<ShopCategory banner={banner} category="Kitcheware" />}
+            path="/kitchenware"
+            element={<ShopCategory banner={banner} category="kitchenware" />}
           />
           <Route
             path="/decor"
