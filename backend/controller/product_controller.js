@@ -1,4 +1,6 @@
 const db = require("../model/index");
+const fs = require("fs");
+const path = require("path");
 const Product = db.product;
 
 exports.addProduct = async (req, res) => {
@@ -38,10 +40,18 @@ exports.addProduct = async (req, res) => {
 exports.removeProduct = async (req, res) => {
   try {
     const productId = req.params.id;
+    const product = await Product.findOne({ where: { id: productId } });
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
 
     const deletedProduct = await Product.destroy({
       where: { id: productId },
     });
+    const imagePath = path.join(__dirname, "../upload/", product.image);
+    if (fs.existsSync(imagePath)) {
+      fs.unlinkSync(imagePath);
+    }
 
     if (!deletedProduct) {
       return res.status(404).json({ message: "Product not found" });
