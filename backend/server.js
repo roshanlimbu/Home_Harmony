@@ -15,6 +15,7 @@ app.get("/", (req, res) => {
   });
 });
 app.use("/products", productRouter);
+app.use("/uploads/", express.static("upload"));
 
 app.listen(PORT, (err) => {
   if (err) {

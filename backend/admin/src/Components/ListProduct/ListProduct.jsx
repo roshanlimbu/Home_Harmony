@@ -2,14 +2,14 @@ import React from "react";
 import "./ListProduct.css";
 import { useState, useEffect } from "react";
 import cross_icon from "../../assets/cross_icon.png";
-
 const ListProduct = () => {
   const [allproducts, setAllProducts] = useState([]);
+  // console.log(allproducts);
   const fetchInfo = async () => {
-    await fetch("http://localhost:5000/allproducts")
+    await fetch("http://localhost:5000/products/show-all-products")
       .then((response) => response.json())
       .then((data) => {
-        setAllProducts(data);
+        setAllProducts(data.products);
       });
   };
   useEffect(() => {
@@ -17,15 +17,20 @@ const ListProduct = () => {
   }, []);
 
   const remove_product = async (id) => {
-    await fetch("http://localhost:5000/removeproduct", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ id: id }),
-    });
-    await fetchInfo();
+    try {
+      await fetch(`http://localhost:5000/products/remove-product/${id}`, {
+        method: "DELETE",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id: id }),
+      });
+      await fetchInfo();
+    } catch (error) {
+      console.error("Error removing product:", error);
+      // Handle error, show an alert or message to the user
+    }
   };
 
   return (
@@ -43,13 +48,11 @@ const ListProduct = () => {
         <hr />
         {allproducts.map((product, index) => {
           return (
-            <>
-              <div
-                key={index}
-                className="listproduct-format-main listproduct-format"
-              >
+            <div key={index}>
+              <div className="listproduct-format-main listproduct-format">
+                {console.log(product.image)}
                 <img
-                  src={product.image}
+                  src={`http://localhost:5000/uploads/${product.image}`}
                   alt=""
                   className="listproduct-product-icon"
                 />
@@ -67,7 +70,7 @@ const ListProduct = () => {
                 />
               </div>
               <hr />
-            </>
+            </div>
           );
         })}
       </div>
