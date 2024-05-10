@@ -1,38 +1,43 @@
-const {
-    Sequelize,
-    DataTypes
-} = require("sequelize");
+const DBconfig = require("../config/dbConfig");
 
-const sequelize = new Sequelize(DBconfig.db, DBconfig.USER, DBconfig.PASS, {
-    host: "localhost",
-    dialect: "mysql",
-    operatirAlias: false,
-    loggin: false,
-    port: 3306,
-    pool: {
-        max: 5,
-        min: 0,
-        accurate: 30000,
-        idle: 10000
-    }
-})
+const { Sequelize, DataTypes } = require("sequelize");
 
-
-sequelize.authenticate().then(() => {
+const sequelize = new Sequelize(DBconfig.DB, DBconfig.USER, DBconfig.PASSWORD, {
+  host: DBconfig.HOST,
+  dialect: DBconfig.dialect,
+  operatirAlias: false,
+  logging: false,
+  port: DBconfig.PORT,
+  pool: {
+    max: DBconfig.max,
+    min: DBconfig.min,
+    acquire: DBconfig.acquire,
+    idle: DBconfig.idle,
+  },
+});
+sequelize
+  .authenticate()
+  .then(() => {
     console.log("conected to database");
-}).catch(err => {
+  })
+  .catch((err) => {
     console.log("err" + err);
-})
+  });
 
 const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-// db.modelName = require("./path")(sequelize, DataTypes);
+// models
+db.users = require("./userModel")(sequelize, DataTypes);
+db.product = require("./productModel")(sequelize, DataTypes);
 
-
-db.sequelize.sync({
+db.sequelize
+  .sync({
     force: false,
-}).then(async () => {
+  })
+  .then(async () => {
     console.log("yes! sync done");
-})
+  });
+
+module.exports = db;
