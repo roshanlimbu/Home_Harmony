@@ -5,8 +5,9 @@ exports.addProduct = async (req, res) => {
   try {
     const { name, category, new_price, old_price, available } = req.body;
 
-    // console.log(req.body);
+    console.log(req.body);
     const image = req.file.filename;
+    // console.log(req.file);
     // Check if required fields are present
     if (!name || !image || !category || !new_price || !old_price) {
       return res
@@ -23,9 +24,11 @@ exports.addProduct = async (req, res) => {
       available: available || true,
     });
 
-    return res
-      .status(201)
-      .json({ message: "Product added successfully", product });
+    return res.status(201).json({
+      message: "Product added successfully",
+      product,
+      status: "success",
+    });
   } catch (error) {
     console.error("Error adding product:", error);
     return res.status(500).json({ message: "Internal Server Error" });
