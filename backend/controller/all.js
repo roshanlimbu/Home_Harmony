@@ -1,22 +1,3 @@
-// api for removing the product
-app.post("/removeproduct", async (req, res) => {
-  await Product.findOneAndDelete({
-    id: req.body.id,
-  });
-  console.log("Removed.");
-  res.json({
-    success: true,
-    name: req.body.name,
-  });
-});
-
-// creating api for getting all products
-app.get("/allproducts", async (req, res) => {
-  let products = await Product.find({});
-  console.log("All products found.");
-  res.send(products);
-});
-
 // Creating Endpoint for regestering the user
 app.post("/signup", async (req, res) => {
   let check = await Users.findOne({
@@ -129,34 +110,4 @@ app.post("/addtocart", fetchUser, async (req, res) => {
   //   { cartData: userData.userData },
   // );
   // res.send("Added");
-});
-
-// adding products
-app.post("/addproduct", async (req, res) => {
-  let products = await Product.find({});
-  let id;
-  if (products.length > 0) {
-    let last_product_array = products.slice(-1);
-    let last_product = last_product_array[0];
-    id = last_product.id + 1;
-  } else {
-    id = 1;
-  }
-
-  const product = new Product({
-    id: id,
-    name: req.body.name,
-    image: req.body.image,
-    category: req.body.category,
-    new_price: req.body.new_price,
-    old_price: req.body.old_price,
-    available: req.body.available,
-  });
-  console.log(product);
-  await product.save();
-  console.log("Product added successfully in the database.");
-  res.json({
-    success: true,
-    name: req.body.name,
-  });
 });
