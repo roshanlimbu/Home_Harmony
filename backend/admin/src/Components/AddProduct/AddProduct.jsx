@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 import "./AddProduct.css";
 import upload_area from "../../assets/upload_area.svg";
@@ -16,46 +17,41 @@ const AddProduct = () => {
   const imageHandler = (e) => {
     setImage(e.target.files[0]);
   };
+
   const changeHandler = (e) => {
     setProductDetails({ ...productDetails, [e.target.name]: e.target.value });
   };
 
   const Add_product = async (e) => {
-    console.log(productDetails);
-    let responseData;
-    let product = productDetails;
-    let formData = new FormData();
-    formData.append("product", image);
+    e.preventDefault();
 
-    await fetch("http://localhost:5000/upload", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-      },
-      body: formData,
-    }).then((response) =>
-      response.json().then((data) => {
-        responseData = data;
-      }),
-    );
+    const formData = new FormData();
+    formData.append("image", image);
 
-    if (responseData.success) {
-      product.image = responseData.image_url;
-      console.log(product);
-      await fetch("http://localhost:5000/addproduct", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
+    for (let key in productDetails) {
+      formData.append(key, productDetails[key]);
+    }
+
+    try {
+      const imageResponse = await axios.post(
+        "http://localhost:5000/products/add-product",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         },
-        body: JSON.stringify(product),
-      }).then((response) =>
-        response.json().then((data) => {
-          data.success
-            ? alert("Successfully added")
-            : alert("Failed to add product");
-        }),
       );
+      console.log(imageResponse);
+
+      if (imageResponse.data.status === "success") {
+        alert("Successfully added");
+      } else {
+        alert("Failed to add product");
+      }
+    } catch (error) {
+      console.error("Error adding product:", error);
+      alert("Failed to add product");
     }
   };
 
@@ -123,15 +119,11 @@ const AddProduct = () => {
           hidden
         />
       </div>
-      <button
-        onClick={() => {
-          Add_product();
-        }}
-        className="addproduct-btn"
-      >
+      <button onClick={Add_product} className="addproduct-btn">
         Add
       </button>
     </div>
   );
 };
+
 export default AddProduct;
