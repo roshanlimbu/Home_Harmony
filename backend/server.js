@@ -19,7 +19,7 @@ app.get("/", (req, res) => {
 
 app.use("/products", productRouter);
 app.use("/popular", popularRouter);
-app.use("/new-collection", newCollectionRouter);
+app.use("/newcollection", newCollectionRouter);
 
 // for uploading photos to the server
 app.use("/uploads/", express.static("upload"));
