@@ -1,6 +1,5 @@
 .hero {
   width: 100%;
-
   height: 100vh;
   background-image: url(../Assets/hero_image.png);
   background-repeat: no-repeat;
@@ -8,67 +7,47 @@
   background-position: center;
   display: flex;
   justify-content: center;
+  transition: opacity 1s ease-in-out;
+  animation: heroBackgroundLoop 15s infinite linear;
+  /* Background looping animation */
 }
 
-.hero-left {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 20px;
-  padding-left: 180px;
-  line-height: 1.1;
-}
+@keyframes heroBackgroundLoop {
+  0% {
+    background-image: url(../Assets/image1.jpg);
+    /* Initial background image */
+  }
 
-.hero-left h2 {
-  color: #090909;
-  font-size: 26px;
-  font-weight: 600;
-}
+  25% {
+    background-image: url(../Assets/image2.jpg);
+    /* Second background image */
+  }
 
-.hero-left p {
-  color: #171717;
-  font-size: 100px;
-  font-weight: 700;
-}
+  50% {
+    background-image: url(../Assets/image3.jpg);
+    /* Third background image */
+  }
 
-.hero-hand-icon {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
+  75% {
+    background-image: url(../Assets/image4.jpg);
+    /* Fourth background image */
+  }
 
-.hero-hand-icon img {
-  width: 105px;
-}
-
-.hero-latest-btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 15px;
-  width: 310px;
-  height: 70px;
-  border-radius: 75px;
-  margin-top: 30px;
-  background: #ff4141;
-  color: white;
-  font-size: 22px;
-  font-weight: 500;
-}
-
-.hero-right {
-  width: 100%;
+  100% {
+    background-image: url(../Assets/image5.jpg);
+    /* Back to the initial background image for seamless looping */
+  }
 }
 
 .hero-main {
   text-align: center;
-  margin-block-start: 20em;
+  margin-top: 25vh;
 }
 
 .hero-main h1 {
   font-size: 6rem;
   padding-block-end: 10px;
+  width: 100%;
 }
 
 .hero-main h1 span {
@@ -76,6 +55,26 @@
 }
 
 .hero-main h2 {
-  font-size: 2rem;
+  font-size: 4.5rem;
   color: #c35e0e;
+}
+
+@media (max-width: 1200px) {
+  .hero-main h2 {
+    font-size: (8vw + 3vh);
+    /* Adjust font size relative to viewport width and height */
+    line-height: 1.2;
+  }
+}
+
+@media (max-width: 800px) {
+  .hero-main h1 {
+    /* font-size: (8vw+2vh); */
+    font-size: 5rem;
+  }
+
+  .hero-main h2 {
+    font-size: 20px;
+    /* font-size: (5vh+3vh); */
+  }
 }

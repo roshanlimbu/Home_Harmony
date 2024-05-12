@@ -5,8 +5,10 @@ import "./Footer.css";
 import instagram_icon from "../Assets/instagram_icon.png";
 import pinterest_icon from "../Assets/pintester_icon.png";
 import whatsapp_icon from "../Assets/whatsapp_icon.png";
+import { useNavigate } from "react-router-dom";
 
-const Footer = () => {
+
+function Footer() {
   return (
     <div className="footer">
       <div className="footer-logo">
@@ -19,13 +21,14 @@ const Footer = () => {
 
         {/* <p>SHOPPER</p> */}
       </div>
+
       <div>
         <ul className="footer-links">
-          <li>Company</li>
-          <li>Products</li>
-          <li>Offices</li>
-          <li>About</li>
-          <li>Contact</li>
+          <li><Link to="/company" style={{ textDecoration: "none" }}>Company</Link></li>
+          <li><Link to="/offices" style={{ textDecoration: "none" }}>Offices</Link></li>
+          <li><Link to="/aboutus" style={{ textDecoration: "none" }}>About Us</Link></li>
+          <li><Link to="/contact" style={{ textDecoration: "none" }}>Contact</Link></li>
+          <li><Link to="/location" style={{ textDecoration: "none" }}>Location</Link></li>
         </ul>
         <div className="footer-social-icon">
           <div className="footer-icons-container">
