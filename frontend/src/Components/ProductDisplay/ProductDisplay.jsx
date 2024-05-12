@@ -7,7 +7,7 @@ import { useContext } from "react";
 
 const ProductDisplay = (props) => {
   const { product } = props;
-  console.log(product);
+  console.log(product.image);
   const { addToCart } = useContext(ShopContext);
   return (
     <div className="productdisplay">
@@ -24,6 +24,7 @@ const ProductDisplay = (props) => {
             src={`http://localhost:5000/uploads/${product.image}`}
             alt=""
           />
+          {console.log()}
         </div>
       </div>
       <div className="productdisplay-right">
