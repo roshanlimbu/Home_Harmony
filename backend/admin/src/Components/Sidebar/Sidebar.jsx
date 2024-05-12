@@ -5,16 +5,17 @@ import add_product_icon from "../../assets/Product_Cart.svg";
 import list_product_icons from "../../assets/Product_list_icon.svg";
 import popularity_icon from "../../assets/popularity.png";
 import newCollection_icon from "../../assets/new-product.png";
+import banner_Editor_icon from "../../assets/ads.png";
 
 const Sidebar = () => {
   return (
     <div className="sidebar">
-      {/* <Link to="/banner" style={{ textDecoration: "none" }}> */}
-      {/*   <div className="sidebar-item"> */}
-      {/*     <img src={banner_Editor_icon} /> */}
-      {/*     <p>Banner Editor</p> */}
-      {/*   </div> */}
-      {/* </Link> */}
+      <Link to="/bannerEditor" style={{ textDecoration: "none" }}>
+        <div className="sidebar-item">
+          <img src={banner_Editor_icon} />
+          <p>Banner Editor</p>
+        </div>
+      </Link>
       <Link to="/addproduct" style={{ textDecoration: "none" }}>
         <div className="sidebar-item">
           <img src={add_product_icon} />

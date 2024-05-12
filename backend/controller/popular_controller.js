@@ -3,7 +3,9 @@ const Product = db.product;
 exports.popular = async (req, res) => {
   try {
     let products = await Product.findAll({
-      category: "kitchenware",
+      where: {
+        category: "kitchenware",
+      },
     });
     let popular_in_kitchenware = products.slice(0, 4);
     console.log("Popular in kitchenware fetched.");
