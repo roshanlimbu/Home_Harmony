@@ -25,7 +25,7 @@ function Footer() {
       <div>
         <ul className="footer-links">
           <li><Link to="/company" style={{ textDecoration: "none" }}>Company</Link></li>
-          <li><Link to="/offices" style={{ textDecoration: "none" }}>Offices</Link></li>
+          <li><Link to="/footeroffice" style={{ textDecoration: "none" }}>Offices</Link></li>
           <li><Link to="/aboutus" style={{ textDecoration: "none" }}>About Us</Link></li>
           <li><Link to="/contact" style={{ textDecoration: "none" }}>Contact</Link></li>
           <li><Link to="/location" style={{ textDecoration: "none" }}>Location</Link></li>
