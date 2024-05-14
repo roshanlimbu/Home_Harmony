@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     cartData: {
       type: DataTypes.JSON,
+      allowNull: true,
     },
   });
 };
