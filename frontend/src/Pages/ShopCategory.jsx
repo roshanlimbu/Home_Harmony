@@ -6,19 +6,28 @@ import Item from "../Components/Item/Item";
 
 const ShopCategory = (props) => {
   const { all_product } = useContext(ShopContext);
+  if (!all_product || !all_product.products) {
+    return <div>Loading...</div>; // or display a loading indicator
+  }
+  // console.log(all_product.products[0].category);
+  // console.log(props.category);
+  const product = all_product.products.find(
+    (e) => e.category === props.category,
+  );
+  if (!product) {
+    return <div>Product not found</div>;
+  }
+
   return (
     <div className="shop-category">
       <img className="shopcategory-banner" src={props.banner} alt="" />
-      <div className="shopcategory-indexSort">
-        {/* <p> */}
-        {/*   <span>Showing 1-12</span> out of 36 products */}
-        {/* </p> */}
-        <div className="shopcatagory-sort">
-          Sort by <img src={dropdown_icon} alt="" />
-        </div>
-      </div>
+      {/* <div className="shopcategory-indexSort"> */}
+      {/*   <div className="shopcatagory-sort"> */}
+      {/*     Sort by <img src={dropdown_icon} alt="" /> */}
+      {/*   </div> */}
+      {/* </div> */}
       <div className="shopcategory-products">
-        {all_product.map((item, i) => {
+        {all_product.products.map((item, i) => {
           if (props.category === item.category) {
             return (
               <Item
@@ -31,9 +40,9 @@ const ShopCategory = (props) => {
               />
             );
           }
+          return null;
         })}
       </div>
-      <div className="shopcategory-loadmore">Explore More</div>
     </div>
   );
 };
