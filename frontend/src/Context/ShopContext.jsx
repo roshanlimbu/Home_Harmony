@@ -22,6 +22,19 @@ const ShopContextProvider = (props) => {
         );
         const data = await response.json();
         setAllProduct(data);
+        if (localStorage.getItem("auth-token")) {
+          fetch("http://localhost:5000/getcart", {
+            method: "POST",
+            headers: {
+              Accept: "application/form-data",
+              "auth-token": `${localStorage.getItem("auth-token")}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ cart: cartItems }),
+          }).then((response) =>
+            response.json().then((data) => setCartItems(data)),
+          );
+        }
       } catch (error) {
         console.error("Error fetching products:", error);
       }
@@ -50,6 +63,22 @@ const ShopContextProvider = (props) => {
   // const removeFromCart = (itemId) => {
   //   setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
   // };
+
+  // const removeFromCart = (itemId) => {
+  //   setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
+  //   if (localStorage.getItem("auth-token")) {
+  //     fetch("http://localhost:5000/removefromcart", {
+  //       method: "POST",
+  //       headers: {
+  //         Accept: "application/json",
+  //         "auth-token": `${localStorage.getItem("auth-token")}`,
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({ itemId: itemId }),
+  //     }).then((response) => response.json());
+  //   }
+  // };
+
   // const getTotalCartAmount = () => {
   //   let totalAmount = 0;
   //   if (all_product.length > 0) {
