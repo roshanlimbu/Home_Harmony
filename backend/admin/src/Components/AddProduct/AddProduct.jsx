@@ -8,6 +8,7 @@ const AddProduct = () => {
   const [image, setImage] = useState(false);
   const [productDetails, setProductDetails] = useState({
     name: "",
+    description: "",
     image: "",
     category: "furniture",
     new_price: "",
@@ -64,6 +65,16 @@ const AddProduct = () => {
           onChange={changeHandler}
           type="text"
           name="name"
+          placeholder="Type here"
+        />
+      </div>
+      <div className="addproduct-itemfield">
+        <p>Product Description:</p>
+        <textarea
+          name="description"
+          value={productDetails.description}
+          onChange={changeHandler}
+          type="text"
           placeholder="Type here"
         />
       </div>
