@@ -5,7 +5,9 @@ import "./Footer.css";
 import instagram_icon from "../Assets/instagram_icon.png";
 import pinterest_icon from "../Assets/pintester_icon.png";
 import whatsapp_icon from "../Assets/whatsapp_icon.png";
+import logo from "../Assets/nav-logo.png"
 import { useNavigate } from "react-router-dom";
+// import nav_dropdown from "../Assets/.png"
 
 
 function Footer() {
@@ -14,13 +16,19 @@ function Footer() {
       <div className="footer-logo">
         {/* <img src={footer_logo} alt="" /> */}
         <Link to="/" style={{ textDecoration: "none" }}>
-          <p>
-            Home <span>Harmony</span>
-          </p>
+          <img src={logo} alt="" />
+          {/* <p> */}
+          {/*   Home <span>Harmony</span> */}
+          {/* </p> */}
         </Link>
 
-        {/* <p>SHOPPER</p> */}
       </div>
+      {/* <img */}
+      {/*   className="nav-dropdown" */}
+      {/*   onClick={dropdown_toggle} */}
+      {/*   src={nav_dropdown} */}
+      {/*   alt="" */}
+      {/* /> */}
 
       <div>
         <ul className="footer-links">
