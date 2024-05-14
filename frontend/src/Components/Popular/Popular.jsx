@@ -27,7 +27,7 @@ const Popular = () => {
       <h1>POPULAR NOW</h1>
       <hr />
       <div className="popular-item">
-        {console.log(popularProducts)}
+        {/* {console.log(popularProducts)} */}
         {popularProducts.map((item, i) => {
           return (
             <Item

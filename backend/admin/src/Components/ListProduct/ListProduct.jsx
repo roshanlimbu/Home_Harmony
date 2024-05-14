@@ -6,7 +6,7 @@ const ListProduct = () => {
   const [allproducts, setAllProducts] = useState([]);
   // console.log(allproducts);
   const fetchInfo = async () => {
-    await fetch("http://localhost:5000/products/show-all-products")
+    await fetch("http://localhost:5000/products/all-products")
       .then((response) => response.json())
       .then((data) => {
         setAllProducts(data.products);
