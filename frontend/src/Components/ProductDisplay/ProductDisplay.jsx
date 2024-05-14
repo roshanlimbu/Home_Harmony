@@ -7,17 +7,11 @@ import { useContext } from "react";
 
 const ProductDisplay = (props) => {
   const { product } = props;
-  console.log(product.image);
+  console.log(product);
   const { addToCart } = useContext(ShopContext);
   return (
     <div className="productdisplay">
       <div className="productdisplay-left">
-        {/* <div className="productdisplay-img-list"> */}
-        {/*   <img src={product.image} alt="" /> */}
-        {/*   <img src={product.image} alt="" /> */}
-        {/*   <img src={product.image} alt="" /> */}
-        {/*   <img src={product.image} alt="" /> */}
-        {/* </div> */}
         <div className="productDisplay-img">
           <img
             className="productdisplay-main-img"
@@ -39,16 +33,11 @@ const ProductDisplay = (props) => {
         </div>
         <div className="productdisplay-right-prices">
           <div className="productdisplay-right-price-old">
-            ${product.old_price}
+            Rs.{product.old_price}
           </div>
           <div className="productdisplay-right-price-new">
-            ${product.new_price}
+            Rs.{product.new_price}
           </div>
-        </div>
-        <div className="productdisplay-right-description">
-          Casual Tee: This ultra-soft tee is crafted from premium cotton for
-          breathable comfort that lasts. The classic crewneck and relaxed fit
-          make it perfect for everyday wear. Available in a variety of colors.
         </div>
         <button
           onClick={() => {
@@ -57,11 +46,12 @@ const ProductDisplay = (props) => {
         >
           ADD TO CART
         </button>
+        {/* <div className="productdisplay-right-description"> */}
+        {/*   {product.description} */}
+        {/* </div> */}
+
         <p className="productdisplay-right-category">
-          <span>Category: </span>kitcheware, decoration products
-        </p>
-        <p className="productdisplay-right-category">
-          <span>Tags: </span>Modern, Latest
+          <span>Category: </span> {product.category}{" "}
         </p>
       </div>
     </div>
