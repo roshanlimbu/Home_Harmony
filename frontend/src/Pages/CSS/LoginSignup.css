@@ -10,7 +10,7 @@
   height: 600px;
   background: white;
   margin: auto;
-  padding: 40px 60px;
+  padding: 60px 60px;
 }
 
 .loginsignup-container h1 {
@@ -65,4 +65,15 @@
   color: #5c5c5c;
   font-size: 18px;
   font-weight: 500;
+}
+
+@media(max-width:800px) {
+  .loginsignup-container {
+    width: 60vw;
+  }
+
+  .loginsignup-container button {
+    width: 60vw;
+    /* text-align: center; */
+  }
 }
