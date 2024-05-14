@@ -4,6 +4,8 @@ const cors = require("cors");
 const productRouter = require("./route/product_route.js");
 const popularRouter = require("./route/popular_route.js");
 const newCollectionRouter = require("./route/newCollection_route.js");
+const loginController = require("./controller/login_controller.js");
+const signupController = require("./controller/signup_controller.js");
 
 const app = express();
 const PORT = process.env.PORT || 7000;
@@ -20,6 +22,8 @@ app.get("/", (req, res) => {
 app.use("/products", productRouter);
 app.use("/popular", popularRouter);
 app.use("/newcollection", newCollectionRouter);
+app.post("/login", loginController.login);
+app.post("/signup", signupController.signup);
 
 // for uploading photos to the server
 app.use("/uploads/", express.static("upload"));
