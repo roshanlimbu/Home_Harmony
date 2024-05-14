@@ -5,13 +5,21 @@ const Product = db.product;
 
 exports.addProduct = async (req, res) => {
   try {
-    const { name, category, new_price, old_price, available } = req.body;
+    const { name, category, description, new_price, old_price, available } =
+      req.body;
 
     console.log(req.body);
     const image = req.file.filename;
     // console.log(req.file);
     // Check if required fields are present
-    if (!name || !image || !category || !new_price || !old_price) {
+    if (
+      !name ||
+      !image ||
+      !description ||
+      !category ||
+      !new_price ||
+      !old_price
+    ) {
       return res
         .status(400)
         .json({ message: "Please provide all required fields" });
@@ -20,6 +28,7 @@ exports.addProduct = async (req, res) => {
     const product = await Product.create({
       name,
       image,
+      description,
       category,
       new_price,
       old_price,

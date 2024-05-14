@@ -86,7 +86,7 @@ const fetchUser = async (req, res, next) => {
   const token = req.header("auth-token");
   if (!token) {
     res.status(401).send({
-      errors: "Please authentiacte.",
+      errors: "Please authenticate.",
     });
   } else {
     try {
@@ -102,12 +102,31 @@ const fetchUser = async (req, res, next) => {
 };
 
 app.post("/addtocart", fetchUser, async (req, res) => {
-  console.log(req.body);
-  // let userData = await Users.findOne({ _id: req.user.id });
-  // userData.cartData[req.body.itemId] += 1;
-  // await Users.findOneAndUpdate(
-  //   { _id: req.user.id },
-  //   { cartData: userData.userData },
-  // );
-  // res.send("Added");
+  // console.log(req.body, req.user);
+  console.log("Added", req.body.itemId);
+  let userData = await Users.findOne({ _id: req.user.id });
+  userData.cartData[req.body.itemId] += 1;
+  await Users.findOneAndUpdate(
+    { _id: req.user.id },
+    { cartData: userData.userData },
+  );
+  res.send("Added");
+});
+
+// endpoint for removing the product from the cart
+app.post("/removefromcart", fetchUser, async (req, res) => {
+  console.log("removed", req.body.itemId);
+  let userData = await Users.findOne({ _id: req.user.id });
+  if (userData.cartData[req.body.itemId] > 0) {
+    userData.cartData[req.body.itemId] -= 1;
+    await Users.findOneAndUpdate({ _id: req.user.id }, { cartData: userData });
+    res.send("Removed from cart.");
+  }
+});
+
+// creating end point to get cartdata
+app.post("/getcart", fetchUser, async (req, res) => {
+  console.log("GetCart");
+  let userData = await Users.findOne({ _id: req.body.user.id });
+  res.json(userData.cartData);
 });
