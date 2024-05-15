@@ -1,4 +1,4 @@
-import React, { useEffet, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./RelatedProducts.css";
 import axios from "axios";
 import Item from "../Item/Item";
