@@ -29,6 +29,12 @@
   gap: 1rem;
 }
 
+@media (max-width:800px) {
+  .shopcategory-products {
+    margin: 0px 10px;
+  }
+}
+
 /* .shopcategory-loadmore { */
 /*   display: flex; */
 /*   justify-content: center; */
