@@ -196,7 +196,7 @@
 @media (max-width: 500px) {
   .navbar {
     /* width: 8px 0px; */
-    padding: 8px 0px;
+    padding: auto;
     gap: 0;
   }
 
