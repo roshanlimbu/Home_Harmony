@@ -17,19 +17,8 @@ function Footer() {
         {/* <img src={footer_logo} alt="" /> */}
         <Link to="/" style={{ textDecoration: "none" }}>
           <img src={logo} alt="" />
-          {/* <p> */}
-          {/*   Home <span>Harmony</span> */}
-          {/* </p> */}
         </Link>
-
       </div>
-      {/* <img */}
-      {/*   className="nav-dropdown" */}
-      {/*   onClick={dropdown_toggle} */}
-      {/*   src={nav_dropdown} */}
-      {/*   alt="" */}
-      {/* /> */}
-
       <div>
         <ul className="footer-links">
           <li><Link to="/company" style={{ textDecoration: "none" }}>Company</Link></li>
