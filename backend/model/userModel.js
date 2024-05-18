@@ -1,5 +1,3 @@
-const { Sequelize, DataTypes } = require("sequelize");
-
 module.exports = (sequelize, DataTypes) => {
   const Users = sequelize.define("user", {
     name: {
@@ -14,10 +12,6 @@ module.exports = (sequelize, DataTypes) => {
     password: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    cartData: {
-      type: DataTypes.JSON,
-      allowNull: true,
     },
   });
   return Users;
