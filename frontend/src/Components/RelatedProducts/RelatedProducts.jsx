@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import "./RelatedProducts.css";
 import axios from "axios";
 import Item from "../Item/Item";
-import { useEffect } from "react";
 
 const RelatedProducts = () => {
   const [relatedProduct, setRelatedProduct] = useState([]);
