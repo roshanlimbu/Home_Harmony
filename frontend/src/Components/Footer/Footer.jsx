@@ -1,42 +1,65 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Footer.css";
-// import footer_logo from "../Assets/logo_big.png";
 import instagram_icon from "../Assets/instagram_icon.png";
 import pinterest_icon from "../Assets/pintester_icon.png";
 import whatsapp_icon from "../Assets/whatsapp_icon.png";
-import logo from "../Assets/nav-logo.png"
-import { useNavigate } from "react-router-dom";
-// import nav_dropdown from "../Assets/.png"
-
+import logo from "../Assets/nav-logo.png";
 
 function Footer() {
+  const [activeLink, setActiveLink] = useState(null);
+
+  const renderContent = () => {
+    switch (activeLink) {
+      case "company":
+        return <p>Information about the company.</p>;
+      case "offices":
+        return <p>Details about our offices.</p>;
+      case "aboutus":
+        return <p>Learn more about us.</p>;
+      case "contact":
+        return <p>How to contact us.</p>;
+      case "location":
+        return <p>Our locations.</p>;
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className="footer">
       <div className="footer-logo">
-        {/* <img src={footer_logo} alt="" /> */}
         <Link to="/" style={{ textDecoration: "none" }}>
-          <img src={logo} alt="" />
+          <img src={logo} alt="Logo" />
         </Link>
       </div>
       <div>
         <ul className="footer-links">
-          <li><Link to="/company" style={{ textDecoration: "none" }}>Company</Link></li>
-          <li><Link to="/footeroffice" style={{ textDecoration: "none" }}>Offices</Link></li>
-          <li><Link to="/aboutus" style={{ textDecoration: "none" }}>About Us</Link></li>
-          <li><Link to="/contact" style={{ textDecoration: "none" }}>Contact</Link></li>
-          <li><Link to="/location" style={{ textDecoration: "none" }}>Location</Link></li>
+          <li><Link to="#" style={{ textDecoration: "none" }} onClick={() => setActiveLink("company")}>Company</Link></li>
+          <li><Link to="#" style={{ textDecoration: "none" }} onClick={() => setActiveLink("offices")}>Offices</Link></li>
+          <li><Link to="#" style={{ textDecoration: "none" }} onClick={() => setActiveLink("aboutus")}>About Us</Link></li>
+          <li><Link to="#" style={{ textDecoration: "none" }} onClick={() => setActiveLink("contact")}>Contact</Link></li>
+          <li><Link to="#" style={{ textDecoration: "none" }} onClick={() => setActiveLink("location")}>Location</Link></li>
         </ul>
         <div className="footer-social-icon">
           <div className="footer-icons-container">
-            <img src={instagram_icon} alt="" />
+            <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+              <img src={instagram_icon} alt="Instagram" />
+            </a>
           </div>
           <div className="footer-icons-container">
-            <img src={pinterest_icon} alt="" />
+            <a href="https://www.pinterest.com" target="_blank" rel="noopener noreferrer">
+              <img src={pinterest_icon} alt="Pinterest" />
+            </a>
           </div>
           <div className="footer-icons-container">
-            <img src={whatsapp_icon} alt="" />
+            <a href="https://www.whatsapp.com" target="_blank" rel="noopener noreferrer">
+              <img src={whatsapp_icon} alt="WhatsApp" />
+            </a>
           </div>
+        </div>
+        <div className="footer-content">
+          {renderContent()}
         </div>
       </div>
       <div className="footer-copyright">
