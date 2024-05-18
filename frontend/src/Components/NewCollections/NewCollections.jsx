@@ -3,7 +3,7 @@ import "./NewCollections.css";
 import Item from "../Item/Item";
 
 const NewCollections = () => {
-  const [new_collecton, setNew_collection] = useState([]);
+  const [new_collection, setNew_collection] = useState([]);
   useEffect(() => {
     fetch("http://localhost:5000/newcollection")
       .then((response) => response.json())
@@ -14,7 +14,7 @@ const NewCollections = () => {
       <h1>Customize Your Home With Us</h1>
       <hr />
       <div className="collections">
-        {new_collecton.map((item, i) => {
+        {new_collection.map((item, i) => {
           return (
             <Item
               key={i}
