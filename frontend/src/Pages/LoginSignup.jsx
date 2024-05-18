@@ -103,6 +103,16 @@ const LoginSignup = () => {
             placeholder="Password"
           />
         </div>
+        <div className="loginsignup-agree">
+          <input
+            type="checkbox"
+            name=""
+            id=""
+            checked={agree}
+            onChange={toggleAgree}
+          />
+          <p>By continuing, i agree to the terms of use & privacy policies.</p>
+        </div>
         <button
           onClick={() => {
             state === "Login" ? login() : signup();
@@ -121,16 +131,6 @@ const LoginSignup = () => {
             <span onClick={() => setState("Sign Up")}>Sign Up</span>
           </p>
         )}
-        <div className="loginsignup-agree">
-          <input
-            type="checkbox"
-            name=""
-            id=""
-            checked={agree}
-            onChange={toggleAgree}
-          />
-          <p>By continuing, i agree to the terms of use & privacy policies.</p>
-        </div>
       </div>
     </div>
   );

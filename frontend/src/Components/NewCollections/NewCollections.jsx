@@ -1,13 +1,20 @@
 import React, { useState, useEffect } from "react";
 import "./NewCollections.css";
 import Item from "../Item/Item";
+import axios from "axios";
 
 const NewCollections = () => {
   const [new_collecton, setNew_collection] = useState([]);
+  const [error, setError] = useState(null);
   useEffect(() => {
-    fetch("http://localhost:5000/newcollection")
-      .then((response) => response.json())
-      .then((data) => setNew_collection(data));
+    axios
+      .get("http://localhost:5000/popular/popular")// make the link to new_collection
+      .then((response) => {
+        setNew_collection(response.data);
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
   }, []);
   return (
     <div className="new-collections">

@@ -32,13 +32,13 @@ const Navbar = () => {
       <ul ref={menuRef} className="nav-menu">
         <li
           onClick={() => {
-            setMenu("shop");
+            setMenu("furniture");
           }}
         >
-          <Link style={{ textDecoration: "none", color: "black" }} to="/">
+          <Link style={{ textDecoration: "none", color: "black" }} to="furniture">
             Furniture
           </Link>
-          {menu === "shop" ? <hr /> : null}
+          {menu === "furniture" ? <hr /> : null}
         </li>
         <li
           onClick={() => {

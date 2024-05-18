@@ -17,6 +17,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Shop />} />
           <Route
+            path="/furniture"
+            element={<ShopCategory banner={banner} category="furniture" />}
+          />
+          <Route
             path="/office"
             element={<ShopCategory banner={banner} category="office" />}
           />
