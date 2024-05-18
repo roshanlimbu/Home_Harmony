@@ -8,7 +8,7 @@ import { useContext } from "react";
 const ProductDisplay = (props) => {
   const { product } = props;
   // console.log(product);
-  const { addToCart } = useContext(ShopContext);
+  const { addtocart } = useContext(ShopContext);
   return (
     <div className="productdisplay">
       <div className="productdisplay-left">
@@ -41,7 +41,7 @@ const ProductDisplay = (props) => {
         </div>
         <button
           onClick={() => {
-            addToCart(product.id);
+            addtocart(product.id);
           }}
         >
           ADD TO CART
