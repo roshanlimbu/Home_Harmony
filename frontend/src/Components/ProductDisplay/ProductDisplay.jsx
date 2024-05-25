@@ -7,7 +7,7 @@ import { useContext } from "react";
 
 const ProductDisplay = (props) => {
   const { product } = props;
-  const { addToCart } = useContext(ShopContext);
+  const { addtocart } = useContext(ShopContext);
 
   // Function to render stars based on rating
   const renderStars = (rating) => {
