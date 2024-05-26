@@ -1,26 +1,24 @@
 // const express = require("express");
 // const router = express.Router();
-// const { userModel, productModel, cartItem } = require("../model");
 // const {
-//   addtocart,
 //   fetchUser,
+//   addtocart,
 //   removefromcart,
-//   getcart,
-// } = require("../controller/cart_controller.js");
-// const { authenticateToken } = require("../middleware/auth");
+//   getCartItems,
+//   updatecart,
+// } = require("../controller/cart_controller");
 //
-// // Fetch all products
-// router.get("/products/all-products", async (req, res) => {
-//   try {
-//     const products = await productModel.findAll();
-//     res.json(products);
-//   } catch (error) {
-//     res.status(500).json({ error: "Failed to fetch products" });
-//   }
-// });
+// // Middleware to authenticate user
+// router.use(fetchUser);
 //
-// router.get("/getcart", authenticateToken, getcart);
-// router.post("/removefromcart", authenticateToken, removefromcart);
-// router.post("/addtocart", addtocart);
+// // Add to cart
+// router.post("addtocart", addtocart);
+//
+// // Remove from cart
+// router.post("removefromcart", removefromcart);
+//
+// // Get cart items
+// router.get("/getcart", getCartItems);
+// router.get("/updatecart", updatecart);
 //
 // module.exports = router;

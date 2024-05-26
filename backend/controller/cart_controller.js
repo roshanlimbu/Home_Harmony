@@ -28,28 +28,28 @@ const addtocart = async (req, res) => {
     const { cartData } = req.body;
 
     if (!cartData) {
-      return res.status(400).json({ errors: "Invalid reques body." });
+      return res.status(400).json({ errors: "Invalid request body." });
     }
+
     for (const productId in cartData) {
       const quantity = cartData[productId];
-      // Perform your add to cart logic here
       console.log(`Adding ${quantity} of product ${productId} to cart`);
       console.log("user id: ", req.user.id);
-    }
 
-    let cartItem = await CartItem.findOne({
-      where: { userId: req.user.id, productId: req.body.productId },
-    });
-
-    if (cartItem) {
-      cartItem.quantity += 1;
-      await cartItem.save();
-    } else {
-      await CartItem.create({
-        userId: req.user.id,
-        productId: req.body.productId,
-        quantity: 1,
+      let cartItem = await CartItem.findOne({
+        where: { userId: req.user.id, productId: productId },
       });
+
+      if (cartItem) {
+        cartItem.quantity += quantity;
+        await cartItem.save();
+      } else {
+        await CartItem.create({
+          userId: req.user.id,
+          productId: productId,
+          quantity: quantity,
+        });
+      }
     }
 
     res.status(200).send({ status: "Added" });
@@ -83,8 +83,14 @@ const getcart = async (req, res) => {
 // Remove item from cart
 const removefromcart = async (req, res) => {
   try {
+    const { itemId } = req.body;
+
+    if (!itemId) {
+      return res.status(400).json({ errors: "Invalid request body." });
+    }
+
     let cartItem = await CartItem.findOne({
-      where: { userId: req.user.id, productId: req.body.itemId },
+      where: { userId: req.user.id, productId: itemId },
     });
 
     if (cartItem) {
@@ -94,9 +100,9 @@ const removefromcart = async (req, res) => {
       } else {
         await cartItem.destroy();
       }
-      res.send("Removed from cart.");
+      res.status(200).send("Removed from cart.");
     } else {
-      res.send("Item not in cart.");
+      res.status(404).send("Item not in cart.");
     }
   } catch (error) {
     console.error("Error removing from cart:", error);
@@ -106,9 +112,74 @@ const removefromcart = async (req, res) => {
   }
 };
 
+// Update cart (add or remove item)
+const updatecart = async (req, res) => {
+  try {
+    const { cartData, itemId, action } = req.body;
+
+    if (!itemId || !action) {
+      return res.status(400).json({ errors: "Invalid request body." });
+    }
+
+    let cartItem = await CartItem.findOne({
+      where: { userId: req.user.id, productId: itemId },
+    });
+
+    if (action === "remove") {
+      if (cartItem) {
+        if (cartItem.quantity > 1) {
+          cartItem.quantity -= 1;
+          await cartItem.save();
+        } else {
+          await cartItem.destroy();
+        }
+        res.status(200).send("Removed from cart.");
+      } else {
+        res.status(404).send("Item not in cart.");
+      }
+    } else if (action === "add") {
+      if (cartItem) {
+        cartItem.quantity += 1;
+        await cartItem.save();
+      } else {
+        await CartItem.create({
+          userId: req.user.id,
+          productId: itemId,
+          quantity: 1,
+        });
+      }
+      res.status(200).send("Added to cart.");
+    } else {
+      res.status(400).send("Invalid action.");
+    }
+  } catch (error) {
+    console.error("Error updating cart:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+const getCartItems = async (req, res) => {
+  try {
+    const cartItems = await CartItem.findAll({
+      where: { userId: req.user.id },
+    });
+
+    const cartData = {};
+    cartItems.forEach((item) => {
+      cartData[item.productId] = item.quantity;
+    });
+
+    res.json(cartData);
+  } catch (error) {
+    console.error("Error getting cart:", error);
+    res.status(500).send({ errors: "Error getting cart." });
+  }
+};
+
 module.exports = {
   addtocart,
+  updatecart,
   fetchUser,
   removefromcart,
+  getCartItems,
   getcart,
 };
