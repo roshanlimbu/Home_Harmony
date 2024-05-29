@@ -1,92 +1,79 @@
+/* Basic styles for the item */
 .item {
-  width: 280px;
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: white;
+  border: 1px solid #ddd;
+  margin: 10px;
+  transition: all 0.3s ease-in-out;
 }
 
 .item img {
-  width: 280px;
+  max-width: 100%;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.item img:hover {
+  transform: scale(1.05);
 }
 
 .item p {
-  margin: 6px 0px;
+  font-size: 16px;
+  margin: 10px 0;
+  text-align: center;
 }
 
 .item-prices {
   display: flex;
-  gap: 20px;
+  flex-direction: column;
+  align-items: center;
 }
 
 .item-price-new {
-  color: #374151;
+  color: green;
+  font-weight: bold;
   font-size: 18px;
-  font-weight: 600;
 }
 
 .item-price-old {
-  color: #8c8c8c;
-  font-size: 18px;
-  font-weight: 500;
   text-decoration: line-through;
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
 }
 
-.item:hover {
-  transform: scale(1.05);
-  transition: 0.6s;
-}
-
-@media (max-width:1280px) {
+/* Responsive adjustments */
+@media (max-width: 800px) {
   .item {
-    width: 220px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    margin: 5px;
+  }
+
+  .item img {
+    width: 100%;
+    height: auto;
+  }
+
+  .item p {
     font-size: 14px;
+    margin: 5px 0;
+    text-align: left;
   }
 
-  .item img {
-    width: 220px;
+  .item-prices {
+    align-items: flex-start;
   }
 
-  .item-price-old {
-    font-size: 14px;
-  }
-}
-
-@media(max-width:1024px) {
-  .item {
-    width: 170px;
-    font-size: 13px;
-  }
-
-  .item img {
-    width: 170px;
-  }
-
-  .item-price-old {
-    font-size: 13px;
-  }
-}
-
-@media(max-width:800px) {
-  .item {
-    width: 120px;
-    font-size: 12px;
-  }
-
-  .item img {
-    width: 120px;
+  .item-price-new {
+    font-size: 16px;
   }
 
   .item-price-old {
     font-size: 12px;
-  }
-}
-
-@media(max-width:500px) {
-  .item {
-    width: 160px;
-  }
-
-  .item img {
-    width: 160px;
-    /* width: 100%; */
-    /* height: auto; */
   }
 }

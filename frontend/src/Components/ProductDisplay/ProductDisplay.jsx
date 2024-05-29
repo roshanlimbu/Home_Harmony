@@ -7,8 +7,22 @@ import { useContext } from "react";
 
 const ProductDisplay = (props) => {
   const { product } = props;
-  // console.log(product);
-  const { addtocart } = useContext(ShopContext);
+  const { addToCart } = useContext(ShopContext);
+
+  // Function to render stars based on rating
+  const renderStars = (rating) => {
+    const totalStars = 5;
+    const stars = [];
+    for (let i = 0; i < totalStars; i++) {
+      if (i < rating) {
+        stars.push(<img key={i} src={star_icon} alt="star" />);
+      } else {
+        stars.push(<img key={i} src={star_dull_icon} alt="dull star" />);
+      }
+    }
+    return stars;
+  };
+
   return (
     <div className="productdisplay">
       <div className="productdisplay-left">
@@ -16,20 +30,15 @@ const ProductDisplay = (props) => {
           <img
             className="productdisplay-main-img"
             src={`http://localhost:5000/uploads/${product.image}`}
-            alt=""
+            alt={product.name}
           />
-          {/* {console.log()} */}
         </div>
       </div>
       <div className="productdisplay-right">
         <h1>{product.name}</h1>
         <div className="productdisplay-right-stars">
-          <img src={star_icon} alt="" />
-          <img src={star_icon} alt="" />
-          <img src={star_icon} alt="" />
-          <img src={star_icon} alt="" />
-          <img src={star_dull_icon} alt="" />
-          <p>(122)</p>
+          {renderStars(product.rating)}
+          <p>({product.reviewsCount})</p>
         </div>
         <div className="productdisplay-right-prices">
           <div className="productdisplay-right-price-old">
@@ -46,12 +55,8 @@ const ProductDisplay = (props) => {
         >
           ADD TO CART
         </button>
-        {/* <div className="productdisplay-right-description"> */}
-        {/*   {product.description} */}
-        {/* </div> */}
-
         <p className="productdisplay-right-category">
-          <span>Category: </span> {product.category}{" "}
+          <span>Category: </span> {product.category}
         </p>
       </div>
     </div>

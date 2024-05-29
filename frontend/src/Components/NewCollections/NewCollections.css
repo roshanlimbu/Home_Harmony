@@ -1,28 +1,48 @@
+/* NewCollections.css */
 .new-collections {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 100px;
+  padding: 20px;
+  text-align: center;
 }
 
 .new-collections h1 {
-  color: #171717;
-  font-size: 50px;
-  font-weight: 600;
+  font-size: 2em;
+  margin-bottom: 20px;
 }
 
 .new-collections hr {
-  width: 200px;
-  height: 6px;
-  border-radius: 10px;
-  background: #252525;
+  margin: 20px auto;
+  width: 80%;
+  border: 1px solid #ccc;
 }
 
-
 .collections {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  margin-top: 50px;
-  gap: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .new-collections h1 {
+    font-size: 1.5em;
+  }
+
+  .new-collections hr {
+    width: 90%;
+  }
+
+  .collections {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1200px) {
+  .new-collections h1 {
+    font-size: 1.75em;
+  }
+
+  .collections {
+    justify-content: space-around;
+  }
 }
