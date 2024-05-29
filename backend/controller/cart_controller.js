@@ -34,8 +34,8 @@ const addtocart = async (req, res) => {
     for (const productId in cartData) {
       const quantity = cartData[productId];
       // Perform your add to cart logic here
-      console.log(`Adding ${quantity} of product ${productId} to cart`);
-      console.log("user id: ", req.user.id);
+      // console.log(`Adding ${quantity} of product ${productId} to cart`);
+      // console.log("user id: ", req.user.id);
 
       let cartItem = await CartItem.findOne({
         where: { userId: req.user.id, productId: productId },

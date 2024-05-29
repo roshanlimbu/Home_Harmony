@@ -41,11 +41,12 @@ app.get("/newcollection", newCollection);
 
 app.post("/addtocart", fetchUser, addtocart);
 app.post("/removefromcart", fetchUser, removefromcart);
-app.post("/updateCart", updatecart);
+app.post("/updateCart", fetchUser, updatecart);
 app.get("/getcart", fetchUser, getcart);
 
 // for uploading photos to the server
 app.use("/uploads/", express.static("upload"));
+
 app.post("/login", loginController.login);
 app.post("/signup", signupController.signup);
 app.listen(PORT, (err) => {
