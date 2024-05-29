@@ -116,12 +116,31 @@ const updatecart = async (req, res) => {
   try {
     const { cartData, itemId, action } = req.body;
 
-    if (!itemId) {
+    // Validate request body
+    if (!cartData || !itemId || !action) {
+      console.error("Invalid request body:", req.body);
       return res.status(400).json({ errors: "Invalid request body." });
     }
 
+    // Log the incoming request
+    console.log("Incoming request:", {
+      user: req.user,
+      cartData,
+      itemId,
+      action,
+    });
+
+    // Check if user ID is set
+    if (!req.user || !req.user.id) {
+      console.error("User ID is not set in request.");
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+
+    const userId = req.user.id;
+
+    // Find the cart item
     let cartItem = await CartItem.findOne({
-      where: { userId: req.user.id, productId: itemId },
+      where: { userId, productId: itemId },
     });
 
     if (action === "remove") {
@@ -129,33 +148,41 @@ const updatecart = async (req, res) => {
         if (cartItem.quantity > 1) {
           cartItem.quantity -= 1;
           await cartItem.save();
+          console.log("Item quantity decreased:", cartItem);
         } else {
           await cartItem.destroy();
+          console.log("Item removed from cart:", itemId);
         }
-        res.status(200).send("Removed from cart.");
+        return res.status(200).send("Removed from cart.");
       } else {
-        res.status(404).send("Item not in cart.");
+        console.error("Item not found in cart:", itemId);
+        return res.status(404).send("Item not in cart.");
       }
     } else if (action === "add") {
       if (cartItem) {
         cartItem.quantity += 1;
         await cartItem.save();
+        console.log("Item quantity increased:", cartItem);
       } else {
         await CartItem.create({
-          userId: req.user.id,
+          userId,
           productId: itemId,
           quantity: 1,
         });
+        console.log("Item added to cart:", { userId, productId: itemId });
       }
-      res.status(200).send("Added to cart.");
+      return res.status(200).send("Added to cart.");
     } else {
-      res.status(400).send("Invalid action.");
+      console.error("Invalid action:", action);
+      return res.status(400).send("Invalid action.");
     }
   } catch (error) {
     console.error("Error updating cart:", error);
-    res.status(500).json({ error: "Internal server error" });
+    return res.status(500).json({ error: "Internal server error" });
   }
 };
+
+module.exports = updatecart;
 
 module.exports = {
   addtocart,

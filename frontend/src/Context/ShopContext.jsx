@@ -59,6 +59,7 @@ const ShopContextProvider = (props) => {
 
   const updateCartInDatabase = async (cartData, itemId, action) => {
     try {
+      console.log("Updating cart in database:", { cartData, itemId, action });
       await axios.post(
         "http://localhost:5000/updatecart",
         { cartData, itemId, action },
