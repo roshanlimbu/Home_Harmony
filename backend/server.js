@@ -6,12 +6,15 @@ const popularRouter = require("./route/popular_route.js");
 const loginController = require("./controller/login_controller.js");
 const signupController = require("./controller/signup_controller.js");
 const { newCollection } = require("./controller/newCollection_controller.js");
-// const cartItemRouter = require("./route/cart_route.js");
+// const cartRoutes = require("./route/cart_route");
+
 const {
   addtocart,
   removefromcart,
   getcart,
+  getCartItems,
   fetchUser,
+  updatecart,
 } = require("./controller/cart_controller.js");
 
 const app = express();
@@ -34,17 +37,17 @@ app.use("/products", productRouter);
 app.use("/popular", popularRouter);
 app.get("/newcollection", newCollection);
 
-// app.use("/", cartItemRouter);
+// app.use("/cart", cartRoutes);
 
 app.post("/addtocart", fetchUser, addtocart);
 app.get("/getcart", fetchUser, getcart);
 app.post("/removefromcart", fetchUser, removefromcart);
+app.get("/updateCart", updatecart);
 
 // for uploading photos to the server
 app.use("/uploads/", express.static("upload"));
 app.post("/login", loginController.login);
 app.post("/signup", signupController.signup);
-
 app.listen(PORT, (err) => {
   if (err) {
     console.error(`Error starting server`);

@@ -3,19 +3,10 @@ import axios from "axios";
 
 export const ShopContext = createContext(null);
 
-// const getDefaultCart = () => {
-//   let cart = {};
-//   for (let index = 0; index < 50 + 1; index++) {
-//     cart[index] = 0;
-//   }
-//   return cart;
-// };
-
 const ShopContextProvider = (props) => {
   const [all_product, setAllProduct] = useState([]);
-  const [cartItems, setCartItems] = useState(0);
+  const [cartItems, setCartItems] = useState({});
 
-  // Fetch products and cart data on mount
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -45,41 +36,38 @@ const ShopContextProvider = (props) => {
 
     fetchProducts();
   }, []);
-  console.log("Auth token:", localStorage.getItem("auth-token"));
 
   const addtocart = async (itemId) => {
     setCartItems((prev) => {
       const newCartItems = { ...prev, [itemId]: (prev[itemId] || 0) + 1 };
-      updateCartInDatabase(newCartItems);
+      updateCartInDatabase(newCartItems, itemId, "add");
       return newCartItems;
     });
   };
 
   const removeFromCart = async (itemId) => {
     setCartItems((prev) => {
-      const newCartItems = { ...prev, [itemId]: prev[itemId] - 1 };
-      if (newCartItems[itemId] === 0) {
+      const newCartItems = { ...prev, [itemId]: (prev[itemId] || 0) - 1 };
+      if (newCartItems[itemId] <= 0) {
         delete newCartItems[itemId];
       }
-      updateCartInDatabase(newCartItems);
+      updateCartInDatabase(newCartItems, itemId, "remove");
       return newCartItems;
     });
   };
 
-  const updateCartInDatabase = async (cartData) => {
+  const updateCartInDatabase = async (cartData, itemId, action) => {
     try {
-      if (localStorage.getItem("auth-token")) {
-        await axios.post(
-          "http://localhost:5000/addtocart",
-          { cartData },
-          {
-            headers: {
-              "auth-token": localStorage.getItem("auth-token"),
-              "Content-Type": "application/json",
-            },
+      await axios.post(
+        "http://localhost:5000/updatecart",
+        { cartData, itemId, action },
+        {
+          headers: {
+            "auth-token": localStorage.getItem("auth-token"),
+            "Content-Type": "application/json",
           },
-        );
-      }
+        },
+      );
     } catch (error) {
       console.error(
         "Error updating cart in database:",
