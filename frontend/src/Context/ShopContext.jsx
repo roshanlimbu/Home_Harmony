@@ -51,6 +51,7 @@ const ShopContextProvider = (props) => {
       if (newCartItems[itemId] <= 0) {
         delete newCartItems[itemId];
       }
+      console.log("Removing item from the cart: ", newCartItems);
       updateCartInDatabase(newCartItems, itemId, "remove");
       return newCartItems;
     });

@@ -33,6 +33,7 @@ const addtocart = async (req, res) => {
 
     for (const productId in cartData) {
       const quantity = cartData[productId];
+      // Perform your add to cart logic here
       console.log(`Adding ${quantity} of product ${productId} to cart`);
       console.log("user id: ", req.user.id);
 
@@ -41,13 +42,13 @@ const addtocart = async (req, res) => {
       });
 
       if (cartItem) {
-        cartItem.quantity += quantity;
+        cartItem.quantity += quantity; // Use the correct quantity from cartData
         await cartItem.save();
       } else {
         await CartItem.create({
           userId: req.user.id,
           productId: productId,
-          quantity: quantity,
+          quantity: quantity, // Use the correct quantity from cartData
         });
       }
     }
@@ -83,7 +84,7 @@ const getcart = async (req, res) => {
 // Remove item from cart
 const removefromcart = async (req, res) => {
   try {
-    const { itemId } = req.body;
+    const { itemId } = req.body; // Ensure you are extracting the itemId from req.body
 
     if (!itemId) {
       return res.status(400).json({ errors: "Invalid request body." });
@@ -111,13 +112,11 @@ const removefromcart = async (req, res) => {
     });
   }
 };
-
-// Update cart (add or remove item)
 const updatecart = async (req, res) => {
   try {
     const { cartData, itemId, action } = req.body;
 
-    if (!itemId || !action) {
+    if (!itemId) {
       return res.status(400).json({ errors: "Invalid request body." });
     }
 
@@ -157,29 +156,11 @@ const updatecart = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
-const getCartItems = async (req, res) => {
-  try {
-    const cartItems = await CartItem.findAll({
-      where: { userId: req.user.id },
-    });
-
-    const cartData = {};
-    cartItems.forEach((item) => {
-      cartData[item.productId] = item.quantity;
-    });
-
-    res.json(cartData);
-  } catch (error) {
-    console.error("Error getting cart:", error);
-    res.status(500).send({ errors: "Error getting cart." });
-  }
-};
 
 module.exports = {
   addtocart,
   updatecart,
   fetchUser,
   removefromcart,
-  getCartItems,
   getcart,
 };

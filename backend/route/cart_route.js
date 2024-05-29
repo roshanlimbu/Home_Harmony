@@ -12,13 +12,12 @@
 // router.use(fetchUser);
 //
 // // Add to cart
-// router.post("addtocart", addtocart);
+// router.post("/cart/add", addtocart);
 //
 // // Remove from cart
-// router.post("removefromcart", removefromcart);
+// router.post("/cart/remove", removefromcart);
 //
 // // Get cart items
-// router.get("/getcart", getCartItems);
-// router.get("/updatecart", updatecart);
+// router.get("/cart/items", getCartItems);
 //
 // module.exports = router;

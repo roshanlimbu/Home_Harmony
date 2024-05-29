@@ -40,9 +40,9 @@ app.get("/newcollection", newCollection);
 // app.use("/cart", cartRoutes);
 
 app.post("/addtocart", fetchUser, addtocart);
-app.get("/getcart", fetchUser, getcart);
 app.post("/removefromcart", fetchUser, removefromcart);
-app.get("/updateCart", updatecart);
+app.post("/updateCart", updatecart);
+app.get("/getcart", fetchUser, getcart);
 
 // for uploading photos to the server
 app.use("/uploads/", express.static("upload"));
