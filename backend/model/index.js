@@ -32,6 +32,7 @@ db.sequelize = sequelize;
 db.users = require("./userModel")(sequelize, DataTypes);
 db.product = require("./productModel")(sequelize, DataTypes);
 db.cartItem = require("./cartItem")(sequelize, DataTypes);
+// db.Transaction = require("./transactionModel")(sequelize, DataTypes);
 
 db.sequelize
   .sync({
