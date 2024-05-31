@@ -1,6 +1,7 @@
 const express = require("express");
 require("dotenv").config();
 const cors = require("cors");
+const axios = require("axios");
 const productRouter = require("./route/product_route.js");
 const popularRouter = require("./route/popular_route.js");
 const loginController = require("./controller/login_controller.js");
@@ -12,7 +13,6 @@ const {
   addtocart,
   removefromcart,
   getcart,
-  getCartItems,
   fetchUser,
   updatecart,
 } = require("./controller/cart_controller.js");
@@ -37,8 +37,6 @@ app.use("/products", productRouter);
 app.use("/popular", popularRouter);
 app.get("/newcollection", newCollection);
 
-// app.use("/cart", cartRoutes);
-
 app.post("/addtocart", fetchUser, addtocart);
 app.post("/removefromcart", fetchUser, removefromcart);
 app.post("/updateCart", fetchUser, updatecart);
@@ -49,6 +47,31 @@ app.use("/uploads/", express.static("upload"));
 
 app.post("/login", loginController.login);
 app.post("/signup", signupController.signup);
+
+app.post("/khalti-api", async (req, res) => {
+  const payload = req.body;
+  const khaltiResponse = await axios.post(
+    "https://a.khalti.com/api/v2/epayment/initiate/",
+    payload,
+    {
+      headers: {
+        Authorization: `key ${process.env.SECRET_KEY}`,
+      },
+    },
+  );
+  if (khaltiResponse) {
+    res.json({
+      success: true,
+      data: khaltiResponse.data,
+    });
+  } else {
+    res.json({
+      success: false,
+      errors: "Something went wrong",
+    });
+  }
+});
+
 app.listen(PORT, (err) => {
   if (err) {
     console.error(`Error starting server`);

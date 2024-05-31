@@ -11,6 +11,9 @@ const CartItems = () => {
     return <div>Loading...</div>; // or display a loading indicator
   }
 
+  const handleProceedToCheckout = () => {
+    window.location.href = "/checkout";
+  };
   // console.log(totalCartAmount);
   const helperProduct = all_product.products;
   return (
@@ -37,9 +40,7 @@ const CartItems = () => {
                   />
                   <p>{e.name}</p>
                   <p>${e.new_price}</p>
-                  <button className="cartitems-quantity">
-                    {cartItems[e.id]}
-                  </button>
+                  <p>{cartItems[e.id]}</p>
                   <p>${e.new_price * cartItems[e.id]}</p>
                   <img
                     className="cartitems-remove-icon"
@@ -75,7 +76,7 @@ const CartItems = () => {
               <h3>${totalCartAmount.toFixed(2)}</h3>
             </div>
           </div>
-          <button>PROCEED TO CHECKOUT</button>
+          <button onClick={handleProceedToCheckout}>PROCEED TO CHECKOUT</button>
         </div>
         <div className="cartitems-promocode">
           <p>If you have a promo code, Enter it here.</p>

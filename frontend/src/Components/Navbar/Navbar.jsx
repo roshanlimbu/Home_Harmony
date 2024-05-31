@@ -35,7 +35,10 @@ const Navbar = () => {
             setMenu("furniture");
           }}
         >
-          <Link style={{ textDecoration: "none", color: "black" }} to="furniture">
+          <Link
+            style={{ textDecoration: "none", color: "black" }}
+            to="furniture"
+          >
             Furniture
           </Link>
           {menu === "furniture" ? <hr /> : null}
