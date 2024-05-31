@@ -35,32 +35,82 @@ function Footer() {
       </div>
       <div>
         <ul className="footer-links">
-          <li><Link to="#" style={{ textDecoration: "none" }} onClick={() => setActiveLink("company")}>Company</Link></li>
-          <li><Link to="#" style={{ textDecoration: "none" }} onClick={() => setActiveLink("offices")}>Offices</Link></li>
-          <li><Link to="#" style={{ textDecoration: "none" }} onClick={() => setActiveLink("aboutus")}>About Us</Link></li>
-          <li><Link to="#" style={{ textDecoration: "none" }} onClick={() => setActiveLink("contact")}>Contact</Link></li>
-          <li><Link to="#" style={{ textDecoration: "none" }} onClick={() => setActiveLink("location")}>Location</Link></li>
+          <li>
+            <Link
+              to="#"
+              style={{ textDecoration: "none" }}
+              onClick={() => setActiveLink("company")}
+            >
+              Company
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="#"
+              style={{ textDecoration: "none" }}
+              onClick={() => setActiveLink("offices")}
+            >
+              Offices
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="#"
+              style={{ textDecoration: "none" }}
+              onClick={() => setActiveLink("aboutus")}
+            >
+              About Us
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="#"
+              style={{ textDecoration: "none" }}
+              onClick={() => setActiveLink("contact")}
+            >
+              Contact
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="#"
+              style={{ textDecoration: "none" }}
+              onClick={() => setActiveLink("location")}
+            >
+              Location
+            </Link>
+          </li>
         </ul>
         <div className="footer-social-icon">
           <div className="footer-icons-container">
-            <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://www.instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <img src={instagram_icon} alt="Instagram" />
             </a>
           </div>
           <div className="footer-icons-container">
-            <a href="https://www.pinterest.com" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://www.pinterest.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <img src={pinterest_icon} alt="Pinterest" />
             </a>
           </div>
           <div className="footer-icons-container">
-            <a href="https://www.whatsapp.com" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://www.whatsapp.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <img src={whatsapp_icon} alt="WhatsApp" />
             </a>
           </div>
         </div>
-        <div className="footer-content">
-          {renderContent()}
-        </div>
+        <div className="footer-content">{renderContent()}</div>
       </div>
       <div className="footer-copyright">
         <hr />
@@ -68,6 +118,6 @@ function Footer() {
       </div>
     </div>
   );
-};
+}
 
 export default Footer;
