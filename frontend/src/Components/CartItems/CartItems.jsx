@@ -12,7 +12,7 @@ const CartItems = () => {
   }
 
   const handleProceedToCheckout = () => {
-    window.location.href = "/checkout";
+    window.location.href = "/payment";
   };
   // console.log(totalCartAmount);
   const helperProduct = all_product.products;
