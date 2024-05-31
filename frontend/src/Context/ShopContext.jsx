@@ -4,8 +4,9 @@ import axios from "axios";
 export const ShopContext = createContext(null);
 
 const ShopContextProvider = (props) => {
-  const [all_product, setAllProduct] = useState([]);
+  const [all_product, setAllProduct] = useState({ products: [] });
   const [cartItems, setCartItems] = useState({});
+  const [totalCartAmount, setTotalCartAmount] = useState(0);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -13,7 +14,8 @@ const ShopContextProvider = (props) => {
         const productResponse = await axios.get(
           "http://localhost:5000/products/all-products",
         );
-        setAllProduct(productResponse.data);
+        // console.log("Product response data:", productResponse.data);
+        setAllProduct(productResponse.data); // Ensure this is an array
 
         if (localStorage.getItem("auth-token")) {
           const cartResponse = await axios.get(
@@ -24,7 +26,8 @@ const ShopContextProvider = (props) => {
               },
             },
           );
-          setCartItems(cartResponse.data);
+          // console.log("Cart response data:", cartResponse.data);
+          setCartItems(cartResponse.data); // Ensure this is an object with item IDs as keys
         }
       } catch (error) {
         console.error(
@@ -36,6 +39,39 @@ const ShopContextProvider = (props) => {
 
     fetchProducts();
   }, []);
+
+  useEffect(() => {
+    const calculateTotalCartAmount = () => {
+      let totalAmount = 0;
+      if (
+        Array.isArray(all_product.products) &&
+        all_product.products.length > 0
+      ) {
+        for (const item in cartItems) {
+          if (cartItems[item] > 0) {
+            let itemInfo = all_product.products.find(
+              (product) => product.id === Number(item),
+            );
+            if (itemInfo) {
+              totalAmount += itemInfo.new_price * cartItems[item];
+              // console.log(
+              //   `Adding ${itemInfo.new_price} * ${cartItems[item]} for item ${item}`,
+              // );
+            } else {
+              console.log(`Item info not found for item id ${item}`);
+            }
+          } else {
+            console.log(`Item ${item} has quantity 0`);
+          }
+        }
+      }
+      // console.log("Total amount calculated:", totalAmount);
+      // console.log("Number of products:", all_product.products.length);
+      setTotalCartAmount(totalAmount);
+    };
+
+    calculateTotalCartAmount();
+  }, [all_product, cartItems]);
 
   const addtocart = async (itemId) => {
     setCartItems((prev) => {
@@ -51,7 +87,7 @@ const ShopContextProvider = (props) => {
       if (newCartItems[itemId] <= 0) {
         delete newCartItems[itemId];
       }
-      console.log("Removing item from the cart: ", newCartItems);
+      console.log("Removing item from the cart:", newCartItems);
       updateCartInDatabase(newCartItems, itemId, "remove");
       return newCartItems;
     });
@@ -78,23 +114,6 @@ const ShopContextProvider = (props) => {
     }
   };
 
-  const getTotalCartAmount = () => {
-    let totalAmount = 0;
-    if (all_product.length > 0) {
-      for (const item in cartItems) {
-        if (cartItems[item] > 0) {
-          let itemInfo = all_product.find(
-            (product) => product.id === Number(item),
-          );
-          if (itemInfo) {
-            totalAmount += itemInfo.new_price * cartItems[item];
-          }
-        }
-      }
-    }
-    return totalAmount;
-  };
-
   const getTotalCartItems = () => {
     let totalItem = 0;
     for (const item in cartItems) {
@@ -108,7 +127,7 @@ const ShopContextProvider = (props) => {
   const contextValue = {
     all_product,
     getTotalCartItems,
-    getTotalCartAmount,
+    totalCartAmount,
     cartItems,
     addtocart,
     removeFromCart,
