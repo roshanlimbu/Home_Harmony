@@ -40,6 +40,35 @@ async function login(req, res) {
   }
 }
 
+async function getUserDetails(req, res) {
+  try {
+    const user = await Users.findOne({
+      where: {
+        email: req.body.email,
+      },
+    });
+
+    if (user) {
+      res.json({
+        success: true,
+        user: { id: user.id, email: user.email }, // Return user email and ID
+      });
+    } else {
+      res.json({
+        success: false,
+        errors: "User not found",
+      });
+    }
+  } catch (error) {
+    console.error("Error getting user details:", error);
+    res.status(500).json({
+      success: false,
+      errors: "Internal Server Error",
+    });
+  }
+}
+
 module.exports = {
   login,
+  getUserDetails,
 };
