@@ -7,7 +7,7 @@ const popularRouter = require("./route/popular_route.js");
 const loginController = require("./controller/login_controller.js");
 const signupController = require("./controller/signup_controller.js");
 const { newCollection } = require("./controller/newCollection_controller.js");
-// const cartRoutes = require("./route/cart_route");
+const userRoutes = require("./route/user_route.js");
 
 const {
   addtocart,
@@ -28,10 +28,6 @@ app.get("/", (req, res) => {
     msg: "hello",
   });
 });
-app.use((req, res, next) => {
-  console.log("Request body:", req.body);
-  next();
-});
 
 app.use("/products", productRouter);
 app.use("/popular", popularRouter);
@@ -48,6 +44,9 @@ app.use("/uploads/", express.static("upload"));
 app.post("/login", loginController.login);
 app.post("/signup", signupController.signup);
 
+app.use("/user", userRoutes);
+
+// ------------------ PAYMENT ------------------
 app.post("/khalti-api", async (req, res) => {
   const payload = req.body;
   const khaltiResponse = await axios.post(
@@ -55,7 +54,7 @@ app.post("/khalti-api", async (req, res) => {
     payload,
     {
       headers: {
-        Authorization: `key ${process.env.SECRET_KEY}`,
+        Authorization: `key ${process.env.KHALTI_SECRET_KEY}`,
       },
     },
   );
