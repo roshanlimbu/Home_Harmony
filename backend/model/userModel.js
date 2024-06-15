@@ -1,5 +1,10 @@
 module.exports = (sequelize, DataTypes) => {
   const Users = sequelize.define("user", {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -13,6 +18,17 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    role: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: 'user'
+    }
   });
+  Users.associate = (models) => {
+    Users.hasMany(models.CartItem, {
+      foreignKey: 'userId',
+      as: 'cartItems'
+    })
+  }
   return Users;
 };

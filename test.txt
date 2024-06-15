@@ -1,0 +1,29 @@
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoyfSwiaWF0IjoxNzE4NDU2MzUwfQ.CcZHjWj7x1CtVY45Kx-ehNn20c8OvhX-tM3lra2PCoU
+
+
+
+// ------------------ PAYMENT ------------------
+// app.post("/khalti-api", async (req, res) => {
+//   const payload = req.body;
+//   const khaltiResponse = await axios.post(
+//     "https://a.khalti.com/api/v2/epayment/initiate/",
+//     payload,
+//     {
+//       headers: {
+//         Authorization: `key ${process.env.KHALTI_SECRET_KEY}`,
+//       },
+//     },
+//   );
+//   if (khaltiResponse) {
+//     res.json({
+//       success: true,
+//       data: khaltiResponse.data,
+//     });
+//   } else {
+//     res.json({
+//       success: false,
+//       errors: "Something went wrong",
+//     });
+//   }
+// });
+
