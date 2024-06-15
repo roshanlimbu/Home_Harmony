@@ -23,12 +23,14 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   CartItem.associate = (models) => {
-    CartItem.belongsTo(models.User, {
+    CartItem.belongsTo(models.Users, {
       foreignKey: "userId",
+      as: "user",
       onDelete: "CASCADE",
     });
     CartItem.belongsTo(models.Product, {
       foreignKey: "productId",
+      as: 'product',
       onDelete: "CASCADE",
     });
   };
