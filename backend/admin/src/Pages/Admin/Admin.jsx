@@ -6,6 +6,7 @@ import AddProduct from "../../Components/AddProduct/AddProduct";
 import ListProduct from "../../Components/ListProduct/ListProduct";
 import Popular from "../../Components/Popular/Popular";
 import NewCollection from "../../Components/NewCollection/NewCollection";
+import GetAllUser from '../../Components/GetUser/GetAllUser'
 
 const Admin = () => {
   return (
@@ -19,6 +20,7 @@ const Admin = () => {
           path="/newCollection"
           element={<NewCollection></NewCollection>}
         />
+      <Route path="/getAllUser" element={<GetAllUser></GetAllUser>}></Route>
       </Routes>
     </div>
   );

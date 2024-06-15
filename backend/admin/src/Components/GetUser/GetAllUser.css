@@ -1,0 +1,42 @@
+.list-user {
+  margin: 20px;
+}
+
+.listuser-format-main {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.user-details {
+  padding: 20px;
+  background-color: #f1f1f1;
+}
+
+.cart-items {
+  margin-top: 20px;
+}
+
+.cart-item {
+  background-color: grey;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}

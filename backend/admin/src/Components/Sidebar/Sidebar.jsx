@@ -6,38 +6,40 @@ import list_product_icons from "../../assets/Product_list_icon.svg";
 import popularity_icon from "../../assets/popularity.png";
 import newCollection_icon from "../../assets/new-product.png";
 import banner_Editor_icon from "../../assets/ads.png";
+import users from '../../assets/group.png'
 
 const Sidebar = () => {
   return (
     <div className="sidebar">
-      <Link to="/bannerEditor" style={{ textDecoration: "none" }}>
-        <div className="sidebar-item">
-          <img src={banner_Editor_icon} />
-          <p>Banner Editor</p>
-        </div>
-      </Link>
-      <Link to="/addproduct" style={{ textDecoration: "none" }}>
+      <Link to="/dashboard/addproduct" style={{ textDecoration: "none" }}>
         <div className="sidebar-item">
           <img src={add_product_icon} />
           <p>Add Product</p>
         </div>
       </Link>
-      <Link to="/listproduct" style={{ textDecoration: "none" }}>
+      <Link to="/dashboard/listproduct" style={{ textDecoration: "none" }}>
         <div className="sidebar-item">
           <img src={list_product_icons} />
           <p>Product List</p>
         </div>
       </Link>
-      <Link to="/popular" style={{ textDecoration: "none" }}>
+      <Link to="/dashboard/popular" style={{ textDecoration: "none" }}>
         <div className="sidebar-item">
           <img src={popularity_icon} />
           <p>Popular Items</p>
         </div>
       </Link>
-      <Link to="/newCollection" style={{ textDecoration: "none" }}>
+      <Link to="/dashboard/newcollection" style={{ textDecoration: "none" }}>
         <div className="sidebar-item">
           <img src={newCollection_icon} />
           <p>New Collection</p>
+        </div>
+      </Link>
+
+      <Link to="/dashboard/getalluser" style={{ textDecoration: "none" }}>
+        <div className="sidebar-item">
+          <img src={users} />
+          <p>Get All User </p>
         </div>
       </Link>
     </div>

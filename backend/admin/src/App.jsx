@@ -1,13 +1,14 @@
-import React from "react";
-import Navbar from "./Components/Navbar/Navbar";
-import Admin from "./Pages/Admin/Admin";
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Login from './Pages/Login/Login.jsx';
+import Dashboard from './Pages/Dashboard/Dashboard.jsx';
 
 const App = () => {
   return (
-    <div>
-      <Navbar />
-      <Admin />
-    </div>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/dashboard/*" element={<Dashboard />} />
+      </Routes>
   );
 };
 
