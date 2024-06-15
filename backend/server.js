@@ -5,7 +5,7 @@ const axios = require("axios");
 const productRouter = require("./route/product_route.js");
 const popularRouter = require("./route/popular_route.js");
 const signupController = require("./controller/signup_controller.js");
-const newCollection = require("./controller/newCollection_controller.js");
+const { newCollection } = require("./controller/newCollection_controller.js");
 const userRoutes = require("./route/user_route.js");
 
 const {
