@@ -9,7 +9,7 @@ const NewCollection = () => {
   const fetchPopular = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/newcollection/newcollection",
+        "http://localhost:5000/newcollection",
       );
       setPopular(response.data);
       console.log(response.data);
