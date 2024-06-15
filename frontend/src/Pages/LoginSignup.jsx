@@ -10,6 +10,7 @@ const LoginSignup = () => {
     username: "",
     password: "",
     email: "",
+    phone: "",
   });
 
   const login = async () => {
@@ -78,13 +79,20 @@ const LoginSignup = () => {
         <h1>{state}</h1>
         <div className="loginsignup-fields">
           {state === "Sign Up" ? (
-            <input
-              type="text"
-              name="username"
-              value={formData.username}
-              onChange={changeHandler}
-              placeholder="Your name"
-            />
+            <>
+              <input
+                type="text"
+                name="username"
+                value={formData.username}
+                onChange={changeHandler}
+                placeholder="Your name"
+              />
+              <input name="phone"
+                value={formData.phone}
+                onChange={changeHandler}
+                type="text"
+                placeholder="Phone no" />
+            </>
           ) : (
             <></>
           )}

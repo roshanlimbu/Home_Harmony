@@ -22,6 +22,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       defaultValue: 'user'
+    },
+     phone: {
+      type: DataTypes.STRING,
+      allowNull: true,
     }
   });
   Users.associate = (models) => {

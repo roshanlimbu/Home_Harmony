@@ -72,6 +72,7 @@ async function getUserDetails(req, res) {
           ],
         },
       ],
+      attributes: ['id', "name", 'email', 'phone'],
     });
 
     if (!user) {
@@ -85,7 +86,9 @@ async function getUserDetails(req, res) {
       success: true,
       user: {
         id: user.id,
+        name: user.name,
         email: user.email,
+        phone: user.phone,
         cartItems: user.cartItems,
       },
     });
@@ -115,6 +118,7 @@ async function getAllUsers(req, res) {
           ],
         },
       ],
+      attributes: ['id', "name", 'email', 'phone', 'role'],
     });
 
     res.json({

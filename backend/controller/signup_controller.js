@@ -28,6 +28,7 @@ async function signup(req, res) {
   const user = new Users({
     name: req.body.username,
     email: req.body.email,
+    phone: req.body.phone,
     password: hashedPassword,
     cartData: cart,
   });
