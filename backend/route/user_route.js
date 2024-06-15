@@ -1,6 +1,15 @@
 const express = require("express");
 const router = express.Router();
-const { getUserDetails } = require("../controller/login_controller");
+const { login, getUserDetails, getAllUsers } = require("../controller/user_controller");
+const { verifyToken, isAdmin } = require("../middleware/auth");
 
-router.get("/", getUserDetails);
+// Route for login
+router.post("/", login);
+
+// Route to get user details
+router.post("/user-details", getUserDetails);
+
+// Route to get all users - protected and only accessible by admin
+router.get("/all-users", verifyToken, isAdmin, getAllUsers);
+
 module.exports = router;
