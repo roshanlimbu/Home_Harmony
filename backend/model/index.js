@@ -39,9 +39,9 @@ db.cartItem = require("./cartItem")(sequelize, DataTypes);
 // associations
 
 db.users.hasMany(db.cartItem, { foreignKey: 'userId', as: 'cartItems' });
-db.product.hasMany(db.cartItem, { foreignKey: 'productid', as: 'cartItems' });
+db.product.hasMany(db.cartItem, { foreignKey: 'productId', as: 'cartItems' });
 db.cartItem.belongsTo(db.users, { foreignKey: 'userId', as: 'user' });
-db.cartItem.belongsTo(db.product, { foreignKey: 'productid', as: 'product' });
+db.cartItem.belongsTo(db.product, { foreignKey: 'productId', as: 'product' })
 
 
 
