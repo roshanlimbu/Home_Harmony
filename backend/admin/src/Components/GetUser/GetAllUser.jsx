@@ -50,6 +50,7 @@ const GetAllUser = () => {
           <p>Id: {selectedUser.id}</p>
           <p>Name: {selectedUser.name}</p>
           <p>Email: {selectedUser.email}</p>
+          <p>Phone: {selectedUser.phone}</p>
           <p>Role: {selectedUser.role}</p>
           <div className="cart-items">
             <h3>Cart Items:</h3>
