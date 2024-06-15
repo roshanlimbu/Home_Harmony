@@ -34,6 +34,14 @@ db.product = require("./productModel")(sequelize, DataTypes);
 db.cartItem = require("./cartItem")(sequelize, DataTypes);
 // db.Transaction = require("./transactionModel")(sequelize, DataTypes);
 
+
+
+// associations
+
+
+
+
+
 db.sequelize
   .sync({
     force: false,

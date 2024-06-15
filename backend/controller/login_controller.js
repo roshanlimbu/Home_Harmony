@@ -51,7 +51,7 @@ async function getUserDetails(req, res) {
     if (user) {
       res.json({
         success: true,
-        user: { id: user.id, email: user.email }, // Return user email and ID
+        user: { id: user.id, email: user.email },
       });
     } else {
       res.json({
