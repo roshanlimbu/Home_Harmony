@@ -11,16 +11,15 @@ function Footer() {
 
   const renderContent = () => {
     switch (activeLink) {
-      case "company":
-        return <p>Information about the company.</p>;
-      case "offices":
-        return <p>Details about our offices.</p>;
       case "aboutus":
-        return <p>Learn more about us.</p>;
+        return <p>Home Harmony is more than just a store, it's a community passionate about creating beautiful and inspiring living spaces. We are a company driven by the desire to empower individuals to express their unique style through a curated selection of furniture and decor.  Our mission is to simplify the home decor journey by providing exceptional customer service, informative resources, and user-friendly tools to transform your house into a haven you'll love.</p>;
+      case "offices":
+        return <p>Details about our offices:
+          Main Office located at Itahari near Ghorka complex.</p>;
       case "contact":
-        return <p>How to contact us.</p>;
-      case "location":
-        return <p>Our locations.</p>;
+        return <p>How to contact us.
+          Phone no: 9812345678
+          Land line: 023-123456</p>;
       default:
         return null;
     }
@@ -39,9 +38,9 @@ function Footer() {
             <Link
               to="#"
               style={{ textDecoration: "none" }}
-              onClick={() => setActiveLink("company")}
+              onClick={() => setActiveLink("aboutus")}
             >
-              Company
+              About Us
             </Link>
           </li>
           <li>
@@ -57,27 +56,9 @@ function Footer() {
             <Link
               to="#"
               style={{ textDecoration: "none" }}
-              onClick={() => setActiveLink("aboutus")}
-            >
-              About Us
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="#"
-              style={{ textDecoration: "none" }}
               onClick={() => setActiveLink("contact")}
             >
               Contact
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="#"
-              style={{ textDecoration: "none" }}
-              onClick={() => setActiveLink("location")}
-            >
-              Location
             </Link>
           </li>
         </ul>
