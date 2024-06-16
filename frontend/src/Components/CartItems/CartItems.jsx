@@ -26,7 +26,6 @@ const CartItems = () => {
         <p>Total</p>
         <p>Remove</p>
       </div>
-      <hr />
       {helperProduct.map((e) => {
         if (cartItems[e.id] > 0) {
           return (
@@ -78,13 +77,13 @@ const CartItems = () => {
           </div>
           <button onClick={handleProceedToCheckout}>PROCEED TO CHECKOUT</button>
         </div>
-        <div className="cartitems-promocode">
-          <p>If you have a promo code, Enter it here.</p>
-          <div className="cartitems-promobox">
-            <input type="text" placeholder="Promo code" />
-            <button>Submit</button>
-          </div>
-        </div>
+        {/* <div className="cartitems-promocode"> */}
+        {/*   <p>If you have a promo code, Enter it here.</p> */}
+        {/*   <div className="cartitems-promobox"> */}
+        {/*     <input type="text" placeholder="Promo code" /> */}
+        {/*     <button>Submit</button> */}
+        {/*   </div> */}
+        {/* </div> */}
       </div>
     </div>
   );

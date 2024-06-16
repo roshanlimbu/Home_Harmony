@@ -148,6 +148,7 @@
     gap: 0.6rem;
     /* Adjust gap */
     font-size: 1rem;
+    padding: 1rem;
     /* Adjust font size */
   }
 
@@ -204,6 +205,7 @@
     background: white;
     justify-content: center;
     top: 4rem;
+    padding: 1rem;
     /* Adjust top position */
   }
 
@@ -223,7 +225,7 @@
 
 @media (max-width: 500px) {
   .navbar {
-    padding: 0.3rem;
+    padding: 0.rem;
     /* Adjust padding */
     gap: 0;
   }
