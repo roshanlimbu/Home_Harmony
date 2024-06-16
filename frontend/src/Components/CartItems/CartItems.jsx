@@ -18,8 +18,8 @@ const CartItems = () => {
   const helperProduct = all_product.products;
   return (
     <div className="cartitems">
-      <div className="cartitems-format-main">
-        <p>Products</p>
+      <div className="cartitems-format-main header">
+        <p>Image</p>
         <p>Title</p>
         <p>Price</p>
         <p>Quantity</p>
