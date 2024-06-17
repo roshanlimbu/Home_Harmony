@@ -7,6 +7,8 @@ const popularRouter = require("./route/popular_route.js");
 const signupController = require("./controller/signup_controller.js");
 const { newCollection } = require("./controller/newCollection_controller.js");
 const userRoutes = require("./route/user_route.js");
+const orderRoute = require('./route/order_route.js')
+
 
 const {
   addtocart,
@@ -40,6 +42,7 @@ app.use("/uploads/", express.static("upload"));
 
 // User-related routes
 app.use("/api/user", userRoutes);
+app.use("/", orderRoute);
 
 // Signup route
 app.post("/signup", signupController.signup);

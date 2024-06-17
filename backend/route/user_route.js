@@ -7,7 +7,7 @@ const { verifyToken, isAdmin } = require("../middleware/auth");
 router.post("/", login);
 
 // Route to get user details
-router.post("/user-details", getUserDetails);
+router.post("/user-details", verifyToken, getUserDetails);
 
 // Route to get all users - protected and only accessible by admin
 router.get("/all-users", verifyToken, isAdmin, getAllUsers);

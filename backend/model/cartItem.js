@@ -10,12 +10,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       defaultValue: 1,
     },
-    // Add userId field
     userId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    // Add productId field if it's missing
     productId: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -33,7 +31,6 @@ module.exports = (sequelize, DataTypes) => {
       as: "product",
       onDelete: "CASCADE",
     });
-    // CartItem.belongsTo(Product, { foreignKey: 'productId', as: 'product' });
   };
 
   return CartItem;

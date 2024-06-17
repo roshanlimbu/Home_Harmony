@@ -1,88 +1,103 @@
-// const axios = require("axios");
-// const Transaction = require("../models/Transaction"); // adjust the path to your Transaction model
-//
-// exports.callKhalti = async (formData, req, res) => {
-//   try {
-//     const headers = {
-//       Authorization: `Key ${process.env.KHALTI_SECRET_KEY}`,
-//       "Content-Type": "application/json",
-//     };
-//     console.log(headers);
-//     const response = await axios.post(
-//       "https://a.khalti.com/api/v2/epayment/initiate/",
-//       formData,
-//       {
-//         headers,
-//       },
-//     );
-//     console.log(response.data);
-//
-//     // Save transaction to the database
-//     await Transaction.create({
-//       txnId: response.data.txnId,
-//       pidx: response.data.pidx,
-//       amount: formData.amount,
-//       purchase_order_id: response.data.purchase_order_id,
-//       transaction_id: response.data.transaction_id,
-//       status: "Initiated",
-//     });
-//
-//     res.json({
-//       message: "khalti success",
-//       payment_method: "khalti",
-//       data: response.data,
-//     });
-//   } catch (err) {
-//     console.log(err);
-//     return res.status(400).json({ error: err?.message });
-//   }
-// };
-//
-// exports.handleKhaltiCallback = async (req, res, next) => {
-//   try {
-//     const { txnId, pidx, amount, purchase_order_id, transaction_id, message } =
-//       req.query;
-//     if (message) {
-//       return res
-//         .status(400)
-//         .json({ error: message || "Error Processing Khalti" });
-//     }
-//
-//     const headers = {
-//       Authorization: `Key ${process.env.KHALTI_SECRET_KEY}`,
-//       "Content-Type": "application/json",
-//     };
-//     const response = await axios.post(
-//       "https://a.khalti.com/api/v2/epayment/lookup/",
-//       { pidx },
-//       { headers },
-//     );
-//
-//     console.log(response.data);
-//     if (response.data.status !== "Completed") {
-//       return res.status(400).json({ error: "Payment not completed" });
-//     }
-//
-//     // Update transaction status in the database
-//     const transaction = await Transaction.findOne({
-//       where: { purchase_order_id },
-//     });
-//
-//     if (!transaction) {
-//       return res.status(404).json({ error: "Transaction not found" });
-//     }
-//
-//     transaction.status = "Completed";
-//     await transaction.save();
-//
-//     console.log(purchase_order_id, pidx);
-//     req.transaction_uuid = purchase_order_id;
-//     req.transaction_code = pidx;
-//     next();
-//   } catch (err) {
-//     console.log(err);
-//     return res
-//       .status(400)
-//       .json({ error: err?.message || "Error Processing Khalti" });
-//   }
-// };
+const db = require('../model/index');
+const Order = db.order;
+const User = require("../model/userModel.js")
+const Product = require('../model/productModel.js')
+
+
+// Create a new order
+async function createOrder(req, res) {
+  try {
+    const { amount, userName, productName, email, quantity, productId, phone } = req.body;
+
+    if (!amount || !productName || !quantity || !email || !phone || !userName) {
+      return res.status(400).json({
+        success: false,
+        message: "All fields are required",
+      });
+    }
+    const newOrder = await Order.create({
+      // orderId,
+      userName,
+      quantity,
+      email,
+      amount,
+      productName,
+      phone,
+    });
+    return res.status(201).json({
+      message: "Order added successfully",
+      newOrder,
+      status: "success",
+    });
+  } catch (error) {
+    console.error("Error creating order", error);
+    return res.status(500).json({ message: "Internal server error", error });
+  }
+}
+
+// Get all orders
+async function getAllOrders(req, res) {
+  try {
+    const orders = await Order.findAll();
+    res.status(200).json(orders);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+}
+
+// Get order by ID
+async function getOrderById(req, res) {
+  try {
+    const { id } = req.params;
+    const order = await Order.findByPk(id);
+    if (!order) {
+      return res.status(404).json({ error: 'Order not found' });
+    }
+    res.status(200).json(order);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+}
+
+// Update order by ID
+async function updateOrder(req, res) {
+  try {
+    const { id } = req.params;
+    const { userId, productId, quantity } = req.body;
+    const order = await Order.findByPk(id);
+    if (!order) {
+      return res.status(404).json({ error: 'Order not found' });
+    }
+    await order.update({ userId, productId, quantity });
+    res.status(200).json(order);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+}
+
+// Delete order by ID
+async function deleteOrder(req, res) {
+  try {
+    const { id } = req.params;
+    const order = await Order.findByPk(id);
+    if (!order) {
+      return res.status(404).json({ error: 'Order not found' });
+    }
+    await order.destroy();
+    res.status(204).end();
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+}
+
+module.exports = {
+  createOrder,
+  getAllOrders,
+  getOrderById,
+  updateOrder,
+  deleteOrder
+};

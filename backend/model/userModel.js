@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       defaultValue: 'user'
     },
-     phone: {
+    phone: {
       type: DataTypes.STRING,
       allowNull: true,
     }
@@ -32,6 +32,12 @@ module.exports = (sequelize, DataTypes) => {
     Users.hasMany(models.CartItem, {
       foreignKey: 'userId',
       as: 'cartItems'
+    })
+  }
+  Users.associate = (models) => {
+    Users.hasMany(models.Order, {
+      foreignKey: 'id',
+      as: 'orders'
     })
   }
   return Users;

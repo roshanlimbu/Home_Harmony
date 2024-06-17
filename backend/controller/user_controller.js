@@ -9,6 +9,8 @@ const Products = db.product;
 async function login(req, res) {
   const { email, password } = req.body;
 
+
+
   if (email === 'admin@gmail.com' && password === 'admin123') {
     const data = {
       user: {
@@ -54,9 +56,10 @@ async function login(req, res) {
 
 async function getUserDetails(req, res) {
   try {
+    const { email } = req.body;
     const user = await Users.findOne({
       where: {
-        email: req.body.email,
+        email: email,
       },
       include: [
         {
