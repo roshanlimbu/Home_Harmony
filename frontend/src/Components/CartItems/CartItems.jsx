@@ -1,20 +1,92 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./CartItems.css";
-import { useContext } from "react";
+import axios from 'axios';
 import { ShopContext } from "../../Context/ShopContext";
 import remove_icon from "../Assets/cart_cross_icon.png";
 
 const CartItems = () => {
-  const { totalCartAmount, all_product, cartItems, removeFromCart } =
-    useContext(ShopContext);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const token = localStorage.getItem("auth-token");
+    const email = localStorage.getItem("auth-email");
+
+    const fetchUser = async () => {
+      try {
+        const response = await axios.post(
+          "http://localhost:5000/api/user/user-details",
+          { email },
+          {
+            headers: {
+              "Authorization": `Bearer ${token}`,
+            },
+          }
+        );
+        setUser(response.data.user);
+      } catch (error) {
+        console.error("Error fetching user data:", error.response ? error.response.data : error.message);
+      }
+    };
+    fetchUser();
+  }, []);
+
+  const { totalCartAmount, all_product, cartItems, removeFromCart } = useContext(ShopContext);
+
   if (!all_product || !all_product.products) {
     return <div>Loading...</div>; // or display a loading indicator
   }
 
-  const handleProceedToCheckout = () => {
-    window.location.href = "/payment";
+  const handleOrderNow = async () => {
+    if (!user) {
+      alert("Please log in to place an order");
+      return;
+    }
+    console.log(user);
+
+    const orderItems = all_product.products.filter(p => cartItems[p.id] > 0).map(p => ({
+      productId: p.id,
+      productName: p.name,
+      quantity: cartItems[p.id],
+      amount: p.new_price * cartItems[p.id]
+    }));
+
+    const orderDetails = {
+      quantity: user.cartItems[0].quantity,
+      amount: totalCartAmount,
+      userName: user.name,
+      email: user.email,
+      phone: user.phone,
+      productName: user.cartItems[0].product.name,
+      productId: user.cartItems[0].product.id
+    };
+
+    // console.log("Order items:", orderItems);
+
+    try {
+      const response = await axios.post(
+        'http://localhost:5000/orders',
+        orderDetails,
+        {
+          headers: {
+            "Authorization": `Bearer ${localStorage.getItem("auth-token")}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response.status === 200 || response.status === 201) {
+        console.log(response.data);
+        alert("Order placed successfully!");
+      } else {
+        console.error("Error placing order:", response);
+        alert("Failed to place order");
+      }
+    } catch (error) {
+      console.error("Error placing order", error.response ? error.response.data : error.message);
+      alert("Failed to place order");
+    }
   };
-  // console.log(totalCartAmount);
+
   const helperProduct = all_product.products;
   return (
     <div className="cartitems">
@@ -75,15 +147,8 @@ const CartItems = () => {
               <h3>${totalCartAmount.toFixed(2)}</h3>
             </div>
           </div>
-          <button onClick={handleProceedToCheckout}>PROCEED TO CHECKOUT</button>
+          <button onClick={handleOrderNow}>Order Now</button>
         </div>
-        {/* <div className="cartitems-promocode"> */}
-        {/*   <p>If you have a promo code, Enter it here.</p> */}
-        {/*   <div className="cartitems-promobox"> */}
-        {/*     <input type="text" placeholder="Promo code" /> */}
-        {/*     <button>Submit</button> */}
-        {/*   </div> */}
-        {/* </div> */}
       </div>
     </div>
   );
