@@ -56,8 +56,8 @@ const ListProduct = () => {
                   className="listproduct-product-icon"
                 />
                 <p>{product.name}</p>
-                <p>${product.old_price}</p>
-                <p>${product.new_price}</p>
+                <p>Rs. {product.old_price}</p>
+                <p>Rs. {product.new_price}</p>
                 <p>{product.category}</p>
                 <img
                   onClick={() => {

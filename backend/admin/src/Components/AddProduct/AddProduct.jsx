@@ -76,6 +76,7 @@ const AddProduct = () => {
           onChange={changeHandler}
           type="text"
           placeholder="Type here"
+          style={{ width: '100%', height: '200px' }}
         />
       </div>
       <div className="addproduct-price">

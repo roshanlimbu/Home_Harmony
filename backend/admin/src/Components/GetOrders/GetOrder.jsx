@@ -58,7 +58,7 @@ const GetOrder = () => {
               <div className="listproduct-format-main listproduct-format">
                 <p>{order.orderId}</p>
                 <p>{order.userName}</p>
-                <p>${order.amount}</p>
+                <p>Rs. {order.amount}</p>
                 <p>{order.email}</p>
                 <p>{order.productName}</p>
                 <p>{order.quantity}</p>

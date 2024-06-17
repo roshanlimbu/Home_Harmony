@@ -111,9 +111,9 @@ const CartItems = () => {
                     className="carticon-product-icon"
                   />
                   <p>{e.name}</p>
-                  <p>${e.new_price}</p>
+                  <p>Rs. {e.new_price}</p>
                   <p>{cartItems[e.id]}</p>
-                  <p>${e.new_price * cartItems[e.id]}</p>
+                  <p>Rs. {e.new_price * cartItems[e.id]}</p>
                   <img
                     className="cartitems-remove-icon"
                     src={remove_icon}
@@ -135,7 +135,7 @@ const CartItems = () => {
           <div>
             <div className="cartitems-total-item">
               <p>Subtotal</p>
-              <p>${totalCartAmount.toFixed(2)}</p>
+              <p>Rs. {totalCartAmount.toFixed(2)}</p>
             </div>
             <hr />
             <div className="cartitems-total-item">
@@ -145,7 +145,7 @@ const CartItems = () => {
             <hr />
             <div className="cartitems-total-item">
               <h3>Total</h3>
-              <h3>${totalCartAmount.toFixed(2)}</h3>
+              <h3>Rs. {totalCartAmount.toFixed(2)}</h3>
             </div>
           </div>
           <button onClick={handleOrderNow}>Order Now</button>
