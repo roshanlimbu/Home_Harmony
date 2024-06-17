@@ -50,8 +50,9 @@ const CartItems = () => {
       amount: p.new_price * cartItems[p.id]
     }));
 
+    const totalQuantity = Object.values(cartItems).reduce((total, quantity) => total + quantity, 0);
     const orderDetails = {
-      quantity: user.cartItems[0].quantity,
+      quantity: totalQuantity,
       amount: totalCartAmount,
       userName: user.name,
       email: user.email,
