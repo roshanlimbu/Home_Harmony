@@ -20,7 +20,7 @@ const ShopCategory = (props) => {
 
   return (
     <div className="shop-category">
-      <img className="shopcategory-banner" src={props.banner} alt="" />
+      {/* <img className="shopcategory-banner" src={props.banner} alt="" /> */}
       {/* <div className="shopcategory-indexSort"> */}
       {/*   <div className="shopcatagory-sort"> */}
       {/*     Sort by <img src={dropdown_icon} alt="" /> */}
