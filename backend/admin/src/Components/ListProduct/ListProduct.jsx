@@ -50,7 +50,6 @@ const ListProduct = () => {
           return (
             <div key={index}>
               <div className="listproduct-format-main listproduct-format">
-                {/* {console.log(product.image)} */}
                 <img
                   src={`http://localhost:5000/uploads/${product.image}`}
                   alt=""

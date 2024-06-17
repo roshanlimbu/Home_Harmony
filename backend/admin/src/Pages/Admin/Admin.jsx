@@ -7,6 +7,7 @@ import ListProduct from "../../Components/ListProduct/ListProduct";
 import Popular from "../../Components/Popular/Popular";
 import NewCollection from "../../Components/NewCollection/NewCollection";
 import GetAllUser from '../../Components/GetUser/GetAllUser'
+import GetAllOrder from '../../Components/GetOrders/GetOrder.jsx'
 
 const Admin = () => {
   return (
@@ -20,7 +21,8 @@ const Admin = () => {
           path="/newCollection"
           element={<NewCollection></NewCollection>}
         />
-      <Route path="/getAllUser" element={<GetAllUser></GetAllUser>}></Route>
+        <Route path="/getAllUser" element={<GetAllUser></GetAllUser>}></Route>
+        <Route path="/getallorder" element={<GetAllOrder></GetAllOrder>}></Route>
       </Routes>
     </div>
   );

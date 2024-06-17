@@ -5,8 +5,8 @@ import add_product_icon from "../../assets/Product_Cart.svg";
 import list_product_icons from "../../assets/Product_list_icon.svg";
 import popularity_icon from "../../assets/popularity.png";
 import newCollection_icon from "../../assets/new-product.png";
-import banner_Editor_icon from "../../assets/ads.png";
 import users from '../../assets/group.png'
+import order from '../../assets/order.png'
 
 const Sidebar = () => {
   return (
@@ -40,6 +40,12 @@ const Sidebar = () => {
         <div className="sidebar-item">
           <img src={users} />
           <p>Get All User </p>
+        </div>
+      </Link>
+      <Link to="/dashboard/getallorder" style={{ textDecoration: "none" }}>
+        <div className="sidebar-item">
+          <img src={order} />
+          <p>Get All Orders </p>
         </div>
       </Link>
     </div>
