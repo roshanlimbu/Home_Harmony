@@ -65,12 +65,16 @@
   height: 50px;
   outline: none;
   border: none;
-  background: #ff5a5a;
+  background: #5FA945;
   color: #fff;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   border-radius: 4px;
+}
+
+.cartitems-total button:hover {
+  background-color: #C35E0E;
 }
 
 @media (max-width: 1200px) {
