@@ -16,9 +16,7 @@ async function signup(req, res) {
       errors: "Existing user found with same email address",
     });
   }
-
   // Hashing the password here
-
   const hashedPassword = await bcrypt.hash(req.body.password.toString(), 10);
 
   let cart = {};

@@ -1,6 +1,5 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-
 const db = require("../model/index");
 const Users = db.users;
 const CartItems = db.cartItem;
@@ -8,9 +7,6 @@ const Products = db.product;
 
 async function login(req, res) {
   const { email, password } = req.body;
-
-
-
   if (email === 'admin@gmail.com' && password === 'admin123') {
     const data = {
       user: {
