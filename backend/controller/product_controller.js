@@ -10,8 +10,6 @@ exports.addProduct = async (req, res) => {
 
     console.log(req.body);
     const image = req.file.filename;
-    // console.log(req.file);
-    // Check if required fields are present
     if (
       !name ||
       !image ||

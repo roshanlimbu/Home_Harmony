@@ -3,9 +3,11 @@ import "./CartItems.css";
 import axios from 'axios';
 import { ShopContext } from "../../Context/ShopContext";
 import remove_icon from "../Assets/cart_cross_icon.png";
+import { useNavigate } from "react-router-dom";
 
 const CartItems = () => {
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("auth-token");
@@ -78,6 +80,8 @@ const CartItems = () => {
       if (response.status === 200 || response.status === 201) {
         console.log(response.data);
         alert("Order placed successfully!");
+        navigate('/payment')
+
       } else {
         console.error("Error placing order:", response);
         alert("Failed to place order");

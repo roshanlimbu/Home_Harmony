@@ -9,33 +9,27 @@
   justify-content: center;
   transition: opacity 1s ease-in-out;
   animation: heroBackgroundLoop 15s infinite linear;
-  /* Background looping animation */
 }
 
 @keyframes heroBackgroundLoop {
   0% {
     background-image: url(../Assets/image1.jpg);
-    /* Initial background image */
   }
 
   25% {
     background-image: url(../Assets/image2.jpg);
-    /* Second background image */
   }
 
   50% {
     background-image: url(../Assets/image3.jpg);
-    /* Third background image */
   }
 
   75% {
     background-image: url(../Assets/image4.jpg);
-    /* Fourth background image */
   }
 
   100% {
     background-image: url(../Assets/image5.jpg);
-    /* Back to the initial background image for seamless looping */
   }
 }
 
@@ -62,19 +56,16 @@
 @media (max-width: 1200px) {
   .hero-main h2 {
     font-size: (8vw + 3vh);
-    /* Adjust font size relative to viewport width and height */
     line-height: 1.2;
   }
 }
 
 @media (max-width: 800px) {
   .hero-main h1 {
-    /* font-size: (8vw+2vh); */
     font-size: 5rem;
   }
 
   .hero-main h2 {
     font-size: 20px;
-    /* font-size: (5vh+3vh); */
   }
 }

@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import "./CSS/ShopCategoty.css";
 import { ShopContext } from "../Context/ShopContext";
-// import dropdown_icon from "../Components/Assets/dropdown_icon.png";
 import Item from "../Components/Item/Item";
 
 const ShopCategory = (props) => {
@@ -9,8 +8,6 @@ const ShopCategory = (props) => {
   if (!all_product || !all_product.products) {
     return <div>Loading...</div>; // or display a loading indicator
   }
-  // console.log(all_product.products[0].category);
-  // console.log(props.category);
   const product = all_product.products.find(
     (e) => e.category === props.category,
   );
@@ -20,12 +17,6 @@ const ShopCategory = (props) => {
 
   return (
     <div className="shop-category">
-      {/* <img className="shopcategory-banner" src={props.banner} alt="" /> */}
-      {/* <div className="shopcategory-indexSort"> */}
-      {/*   <div className="shopcatagory-sort"> */}
-      {/*     Sort by <img src={dropdown_icon} alt="" /> */}
-      {/*   </div> */}
-      {/* </div> */}
       <div className="shopcategory-products">
         {all_product.products.map((item, i) => {
           if (props.category === item.category) {

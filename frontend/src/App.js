@@ -8,6 +8,7 @@ import Cart from "./Pages/Cart";
 import LoginSignup from "./Pages/LoginSignup";
 import Footer from "./Components/Footer/Footer";
 import banner from "./Components/Assets/banner.png";
+import Payment from "./Components/Payment/Payment";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
           </Route>
           <Route path="/cart" element={<Cart />} />
           <Route path="/login" element={<LoginSignup />} />
+          <Route path="/payment" element={<Payment></Payment>} />
         </Routes>
         <Footer />
       </BrowserRouter>
