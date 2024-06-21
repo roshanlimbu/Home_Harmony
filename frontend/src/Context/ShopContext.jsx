@@ -14,8 +14,7 @@ const ShopContextProvider = (props) => {
         const productResponse = await axios.get(
           "http://localhost:5000/products/all-products",
         );
-        // console.log("Product response data:", productResponse.data);
-        setAllProduct(productResponse.data); // Ensure this is an array
+        setAllProduct(productResponse.data);
 
         if (localStorage.getItem("auth-token")) {
           const cartResponse = await axios.get(
@@ -74,11 +73,13 @@ const ShopContextProvider = (props) => {
   }, [all_product, cartItems]);
 
   const addtocart = async (itemId) => {
+
     setCartItems((prev) => {
       const newCartItems = { ...prev, [itemId]: (prev[itemId] || 0) + 1 };
       updateCartInDatabase(newCartItems, itemId, "add");
       return newCartItems;
     });
+    alert("Successfully added to cart.");
   };
 
   const removeFromCart = async (itemId) => {
